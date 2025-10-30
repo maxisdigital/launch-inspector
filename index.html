@@ -10,11 +10,11 @@
 <meta content="website" property="og:type"/>
 <link href="assets/img_32x32_bd90b16b.png" rel="icon" type="image/png"/>
 <title>Adobe Launch Property Downloader</title>
-<script src="assets/script_919334c8.js"></script>
-<link href="assets/style_58b444a4.css" rel="stylesheet"/>
-<script crossorigin="" src="assets/script_ae46d5ff.js"></script>
-<link href="assets/style_c0f91521.css" rel="stylesheet"/>
-<script src="assets/script_40a8d81c.js"></script>
+<script src="assets/script_b6862077.js"></script>
+<link href="assets/style_9785c356.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_e61d9259.js"></script>
+<link href="assets/style_3448b38e.css" rel="stylesheet"/>
+<script src="assets/script_eff815fb.js"></script>
 <style>
             @font-face {
                 font-family: 'Font Awesome 6 Free';
@@ -324,6 +324,7 @@
             }
 
 
+
             function createDataElementTreeItem(element, index) {
                 const itemId = `element-${index}`;
                 const enabledBadge = element.enabled ? 
@@ -333,7 +334,7 @@
                 const sourceCodeSection = element.source_code ? `
                     <div>
                         <p class="text-xs font-semibold text-gray-500 mb-2">Source Code</p>
-                        <div class="bg-gray-900 text-green-400 p-4 rounded border border-gray-700 font-mono text-xs overflow-x-auto">
+                        <div class="bg-gray-50 text-gray-800 p-4 rounded border-2 border-gray-300 font-mono text-xs overflow-x-auto">
                             <pre class="whitespace-pre-wrap">${element.source_code}</pre>
                         </div>
                     </div>
@@ -383,6 +384,7 @@
                     </div>
                 `;
             }
+        
         
 
             function toggleTreeItem(itemId) {
