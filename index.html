@@ -10,11 +10,11 @@
 <meta content="website" property="og:type"/>
 <link href="assets/img_32x32_bd90b16b.png" rel="icon" type="image/png"/>
 <title>Adobe Launch Property Downloader</title>
-<script src="assets/script_dfa0cf5f.js"></script>
-<link href="assets/style_463bd872.css" rel="stylesheet"/>
-<script crossorigin="" src="assets/script_4fe1ad76.js"></script>
-<link href="assets/style_568c9d4d.css" rel="stylesheet"/>
-<script src="assets/script_6d7dc076.js"></script>
+<script src="assets/script_62f61fa4.js"></script>
+<link href="assets/style_5fbecc6d.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_1197d0be.js"></script>
+<link href="assets/style_3226a066.css" rel="stylesheet"/>
+<script src="assets/script_bc281216.js"></script>
 <style>
             @font-face {
                 font-family: 'Font Awesome 6 Free';
@@ -176,22 +176,56 @@
 </div>
 </div>
 </div>
-<div class="animate__animated animate__fadeInUp mb-6" id="implementationPlan">
-<div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl card-shadow p-8 border-2 border-blue-200">
-<div class="flex items-start gap-4 mb-6">
+<div class="hidden animate__animated animate__fadeInUp mb-6" id="navigationTree">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-white rounded-2xl card-shadow p-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+<i class="fas fa-list-check text-purple-600"></i>
+                                                Rules
+                                            </h2>
+<span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-bold text-sm" id="rulesCount">0</span>
+</div>
+<div class="space-y-2 max-h-screen overflow-y-auto" id="rulesTree">
+</div>
+</div>
+<div class="bg-white rounded-2xl card-shadow p-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+<i class="fas fa-database text-indigo-600"></i>
+                                                Data Elements
+                                            </h2>
+<span class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full font-bold text-sm" id="dataElementsCount">0</span>
+</div>
+<div class="space-y-2 max-h-screen overflow-y-auto" id="dataElementsTree">
+</div>
+</div>
+</div>
+</div>
+<div class="animate__animated animate__fadeInUp" id="implementationPlan">
+<div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl card-shadow border-2 border-blue-200 overflow-hidden">
+<div class="flex items-center justify-between p-8 cursor-pointer hover:bg-blue-100 transition-colors" onclick="toggleAccordion('mainPlan')">
+<div class="flex items-start gap-4">
 <i class="fas fa-lightbulb text-4xl text-yellow-500"></i>
 <div>
 <h2 class="text-3xl font-bold text-gray-800 mb-2">Backend Integration Plan</h2>
 <p class="text-gray-600">Complete roadmap for integrating launchpy library with real Adobe Launch API</p>
 </div>
 </div>
-<div class="space-y-6">
-<div class="bg-white rounded-xl p-6 border-l-4 border-blue-500">
-<div class="flex items-center gap-3 mb-4">
+<i class="fas fa-chevron-down text-gray-400 text-2xl transition-transform duration-200" id="mainPlan-icon"></i>
+</div>
+<div class="tree-content" id="mainPlan-content">
+<div class="p-8 pt-0 space-y-4">
+<div class="bg-white rounded-xl overflow-hidden border-2 border-gray-200">
+<div class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50" onclick="toggleAccordion('step1')">
+<div class="flex items-center gap-3">
 <span class="bg-blue-500 text-white font-bold px-3 py-1 rounded-full text-sm">STEP 1</span>
 <h3 class="text-xl font-bold text-gray-800">Backend Setup</h3>
 </div>
-<div class="space-y-3 text-gray-700">
+<i class="fas fa-chevron-down text-gray-400 transition-transform duration-200" id="step1-icon"></i>
+</div>
+<div class="tree-content px-6 pb-6" id="step1-content">
+<div class="space-y-3 text-gray-700 pt-4 border-t-2 border-gray-100">
 <p class="font-semibold text-gray-800">Choose a backend framework:</p>
 <ul class="list-disc list-inside space-y-2 ml-4">
 <li><strong>Flask (Python):</strong> Lightweight, perfect for API endpoints</li>
@@ -201,16 +235,21 @@
 <div class="bg-gray-50 p-4 rounded-lg mt-4 font-mono text-sm">
 <p class="text-gray-600 mb-2">Example Flask setup:</p>
 <pre class="text-gray-800">pip install flask launchpy
-                        pip install flask-cors</pre>
+                                                                                                        pip install flask-cors</pre>
 </div>
 </div>
 </div>
-<div class="bg-white rounded-xl p-6 border-l-4 border-green-500">
-<div class="flex items-center gap-3 mb-4">
+</div>
+<div class="bg-white rounded-xl overflow-hidden border-2 border-gray-200">
+<div class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50" onclick="toggleAccordion('step2')">
+<div class="flex items-center gap-3">
 <span class="bg-green-500 text-white font-bold px-3 py-1 rounded-full text-sm">STEP 2</span>
 <h3 class="text-xl font-bold text-gray-800">Install &amp; Configure launchpy</h3>
 </div>
-<div class="space-y-3 text-gray-700">
+<i class="fas fa-chevron-down text-gray-400 transition-transform duration-200" id="step2-icon"></i>
+</div>
+<div class="tree-content px-6 pb-6" id="step2-content">
+<div class="space-y-3 text-gray-700 pt-4 border-t-2 border-gray-100">
 <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm">
 <p class="text-gray-600 mb-2">Installation:</p>
 <pre class="text-gray-800">pip install launchpy</pre>
@@ -218,147 +257,162 @@
 <div class="bg-gray-50 p-4 rounded-lg mt-4 font-mono text-sm">
 <p class="text-gray-600 mb-2">Configuration file (config.json):</p>
 <pre class="text-gray-800">{
-                          "org_id": "YOUR_ORG_ID@AdobeOrg",
-                          "api_key": "YOUR_CLIENT_ID",
-                          "tech_id": "YOUR_TECH_ACCOUNT_ID",
-                          "secret": "YOUR_CLIENT_SECRET",
-                          "pathToKey": "/path/to/private.key"
-                        }</pre>
+                                                                                                          "org_id": "YOUR_ORG_ID@AdobeOrg",
+                                                                                                          "api_key": "YOUR_CLIENT_ID",
+                                                                                                          "tech_id": "YOUR_TECH_ACCOUNT_ID",
+                                                                                                          "secret": "YOUR_CLIENT_SECRET",
+                                                                                                          "pathToKey": "/path/to/private.key"
+                                                                                                        }</pre>
 </div>
 </div>
 </div>
-<div class="bg-white rounded-xl p-6 border-l-4 border-purple-500">
-<div class="flex items-center gap-3 mb-4">
+</div>
+<div class="bg-white rounded-xl overflow-hidden border-2 border-gray-200">
+<div class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50" onclick="toggleAccordion('step3')">
+<div class="flex items-center gap-3">
 <span class="bg-purple-500 text-white font-bold px-3 py-1 rounded-full text-sm">STEP 3</span>
 <h3 class="text-xl font-bold text-gray-800">Create API Endpoints</h3>
 </div>
-<div class="space-y-3 text-gray-700">
+<i class="fas fa-chevron-down text-gray-400 transition-transform duration-200" id="step3-icon"></i>
+</div>
+<div class="tree-content px-6 pb-6" id="step3-content">
+<div class="space-y-3 text-gray-700 pt-4 border-t-2 border-gray-100">
 <p>Create a Flask app with these endpoints:</p>
 <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm overflow-x-auto">
 <pre class="text-gray-800">from flask import Flask, request, jsonify
-                        from flask_cors import CORS
-                        import launchpy
+                                                                                                        from flask_cors import CORS
+                                                                                                        import launchpy
 
-                        app = Flask(__name__)
-                        CORS(app)
+                                                                                                        app = Flask(__name__)
+                                                                                                        CORS(app)
 
-                        @app.route('/api/authenticate', methods=['POST'])
-                        def authenticate():
-                            data = request.json
-                            config = {
-                                'org_id': data['orgId'],
-                                'api_key': data['clientId'],
-                                'tech_id': data['techAccountId'],
-                                'secret': data['clientSecret'],
-                                'pathToKey': data['privateKeyPath']
-                            }
+                                                                                                        @app.route('/api/authenticate', methods=['POST'])
+                                                                                                        def authenticate():
+                                                                                                            data = request.json
+                                                                                                            config = {
+                                                                                                                'org_id': data['orgId'],
+                                                                                                                'api_key': data['clientId'],
+                                                                                                                'tech_id': data['techAccountId'],
+                                                                                                                'secret': data['clientSecret'],
+                                                                                                                'pathToKey': data['privateKeyPath']
+                                                                                                            }
     
-                            try:
-                                launch = launchpy.Launch(config)
-                                return jsonify({'success': True})
-                            except Exception as e:
-                                return jsonify({'error': str(e)}), 400
+                                                                                                            try:
+                                                                                                                launch = launchpy.Launch(config)
+                                                                                                                return jsonify({'success': True})
+                                                                                                            except Exception as e:
+                                                                                                                return jsonify({'error': str(e)}), 400
 
-                        @app.route('/api/properties/&lt;property_id&gt;/rules', methods=['GET'])
-                        def get_rules(property_id):
-                            try:
-                                launch = launchpy.Launch(config)
-                                rules = launch.getRules(property_id)
+                                                                                                        @app.route('/api/properties/&lt;property_id&gt;/rules', methods=['GET'])
+                                                                                                        def get_rules(property_id):
+                                                                                                            try:
+                                                                                                                launch = launchpy.Launch(config)
+                                                                                                                rules = launch.getRules(property_id)
         
-                                formatted_rules = []
-                                for rule in rules:
-                                    formatted_rules.append({
-                                        'rule_name': rule.get('attributes', {}).get('name'),
-                                        'rule_id': rule.get('id'),
-                                        'enabled': rule.get('attributes', {}).get('enabled'),
-                                        'rule_order': rule.get('attributes', {}).get('rule_order'),
-                                        'event_type': 'Custom',
-                                        'conditions': str(rule.get('attributes', {}).get('rule_components')),
-                                        'actions': str(rule.get('attributes', {}).get('actions')),
-                                        'last_modified': rule.get('attributes', {}).get('updated_at')
-                                    })
+                                                                                                                formatted_rules = []
+                                                                                                                for rule in rules:
+                                                                                                                    formatted_rules.append({
+                                                                                                                        'rule_name': rule.get('attributes', {}).get('name'),
+                                                                                                                        'rule_id': rule.get('id'),
+                                                                                                                        'enabled': rule.get('attributes', {}).get('enabled'),
+                                                                                                                        'rule_order': rule.get('attributes', {}).get('rule_order'),
+                                                                                                                        'event_type': 'Custom',
+                                                                                                                        'conditions': str(rule.get('attributes', {}).get('rule_components')),
+                                                                                                                        'actions': str(rule.get('attributes', {}).get('actions')),
+                                                                                                                        'last_modified': rule.get('attributes', {}).get('updated_at')
+                                                                                                                    })
         
-                                return jsonify({'rules': formatted_rules})
-                            except Exception as e:
-                                return jsonify({'error': str(e)}), 500
+                                                                                                                return jsonify({'rules': formatted_rules})
+                                                                                                            except Exception as e:
+                                                                                                                return jsonify({'error': str(e)}), 500
 
-                        @app.route('/api/properties/&lt;property_id&gt;/data-elements', methods=['GET'])
-                        def get_data_elements(property_id):
-                            try:
-                                launch = launchpy.Launch(config)
-                                elements = launch.getDataElements(property_id)
+                                                                                                        @app.route('/api/properties/&lt;property_id&gt;/data-elements', methods=['GET'])
+                                                                                                        def get_data_elements(property_id):
+                                                                                                            try:
+                                                                                                                launch = launchpy.Launch(config)
+                                                                                                                elements = launch.getDataElements(property_id)
         
-                                formatted_elements = []
-                                for element in elements:
-                                    formatted_elements.append({
-                                        'element_name': element.get('attributes', {}).get('name'),
-                                        'element_id': element.get('id'),
-                                        'element_type': element.get('attributes', {}).get('delegate_descriptor_id'),
-                                        'default_value': element.get('attributes', {}).get('default_value'),
-                                        'storage_duration': element.get('attributes', {}).get('storage_duration'),
-                                        'clean_text': element.get('attributes', {}).get('clean_text'),
-                                        'enabled': element.get('attributes', {}).get('enabled'),
-                                        'last_modified': element.get('attributes', {}).get('updated_at'),
-                                        'source_code': element.get('attributes', {}).get('settings')
-                                    })
+                                                                                                                formatted_elements = []
+                                                                                                                for element in elements:
+                                                                                                                    formatted_elements.append({
+                                                                                                                        'element_name': element.get('attributes', {}).get('name'),
+                                                                                                                        'element_id': element.get('id'),
+                                                                                                                        'element_type': element.get('attributes', {}).get('delegate_descriptor_id'),
+                                                                                                                        'default_value': element.get('attributes', {}).get('default_value'),
+                                                                                                                        'storage_duration': element.get('attributes', {}).get('storage_duration'),
+                                                                                                                        'clean_text': element.get('attributes', {}).get('clean_text'),
+                                                                                                                        'enabled': element.get('attributes', {}).get('enabled'),
+                                                                                                                        'last_modified': element.get('attributes', {}).get('updated_at'),
+                                                                                                                        'source_code': element.get('attributes', {}).get('settings')
+                                                                                                                    })
         
-                                return jsonify({'data_elements': formatted_elements})
-                            except Exception as e:
-                                return jsonify({'error': str(e)}), 500
+                                                                                                                return jsonify({'data_elements': formatted_elements})
+                                                                                                            except Exception as e:
+                                                                                                                return jsonify({'error': str(e)}), 500
 
-                        if __name__ == '__main__':
-                            app.run(debug=True, port=5000)</pre>
+                                                                                                        if __name__ == '__main__':
+                                                                                                            app.run(debug=True, port=5000)</pre>
 </div>
 </div>
 </div>
-<div class="bg-white rounded-xl p-6 border-l-4 border-orange-500">
-<div class="flex items-center gap-3 mb-4">
+</div>
+<div class="bg-white rounded-xl overflow-hidden border-2 border-gray-200">
+<div class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50" onclick="toggleAccordion('step4')">
+<div class="flex items-center gap-3">
 <span class="bg-orange-500 text-white font-bold px-3 py-1 rounded-full text-sm">STEP 4</span>
 <h3 class="text-xl font-bold text-gray-800">Update Frontend Code</h3>
 </div>
-<div class="space-y-3 text-gray-700">
+<i class="fas fa-chevron-down text-gray-400 transition-transform duration-200" id="step4-icon"></i>
+</div>
+<div class="tree-content px-6 pb-6" id="step4-content">
+<div class="space-y-3 text-gray-700 pt-4 border-t-2 border-gray-100">
 <p>Replace the AI-generated data calls with real API calls:</p>
 <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm overflow-x-auto">
 <pre class="text-gray-800">async function loadLaunchPropertyData(credentials, propertyId) {
-                            const API_BASE = 'http://localhost:5000/api';
+                                                                                                            const API_BASE = 'http://localhost:5000/api';
     
-                            addStatus('Authenticating with Adobe Launch...', 'info');
-                            const authResponse = await fetch(`${API_BASE}/authenticate`, {
-                                method: 'POST',
-                                headers: {'Content-Type': 'application/json'},
-                                body: JSON.stringify(credentials)
-                            });
+                                                                                                            addStatus('Authenticating with Adobe Launch...', 'info');
+                                                                                                            const authResponse = await fetch(`${API_BASE}/authenticate`, {
+                                                                                                                method: 'POST',
+                                                                                                                headers: {'Content-Type': 'application/json'},
+                                                                                                                body: JSON.stringify(credentials)
+                                                                                                            });
     
-                            if (!authResponse.ok) {
-                                throw new Error('Authentication failed');
-                            }
+                                                                                                            if (!authResponse.ok) {
+                                                                                                                throw new Error('Authentication failed');
+                                                                                                            }
     
-                            addStatus('Fetching rules...', 'info');
-                            const rulesResponse = await fetch(
-                                `${API_BASE}/properties/${propertyId}/rules`
-                            );
-                            const rulesData = await rulesResponse.json();
+                                                                                                            addStatus('Fetching rules...', 'info');
+                                                                                                            const rulesResponse = await fetch(
+                                                                                                                `${API_BASE}/properties/${propertyId}/rules`
+                                                                                                            );
+                                                                                                            const rulesData = await rulesResponse.json();
     
-                            addStatus('Fetching data elements...', 'info');
-                            const elementsResponse = await fetch(
-                                `${API_BASE}/properties/${propertyId}/data-elements`
-                            );
-                            const elementsData = await elementsResponse.json();
+                                                                                                            addStatus('Fetching data elements...', 'info');
+                                                                                                            const elementsResponse = await fetch(
+                                                                                                                `${API_BASE}/properties/${propertyId}/data-elements`
+                                                                                                            );
+                                                                                                            const elementsData = await elementsResponse.json();
     
-                            return {
-                                rules: rulesData.rules,
-                                dataElements: elementsData.data_elements
-                            };
-                        }</pre>
+                                                                                                            return {
+                                                                                                                rules: rulesData.rules,
+                                                                                                                dataElements: elementsData.data_elements
+                                                                                                            };
+                                                                                                        }</pre>
 </div>
 </div>
 </div>
-<div class="bg-white rounded-xl p-6 border-l-4 border-red-500">
-<div class="flex items-center gap-3 mb-4">
+</div>
+<div class="bg-white rounded-xl overflow-hidden border-2 border-gray-200">
+<div class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50" onclick="toggleAccordion('step5')">
+<div class="flex items-center gap-3">
 <span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-sm">STEP 5</span>
 <h3 class="text-xl font-bold text-gray-800">Security Considerations</h3>
 </div>
-<div class="space-y-3 text-gray-700">
+<i class="fas fa-chevron-down text-gray-400 transition-transform duration-200" id="step5-icon"></i>
+</div>
+<div class="tree-content px-6 pb-6" id="step5-content">
+<div class="space-y-3 text-gray-700 pt-4 border-t-2 border-gray-100">
 <ul class="list-disc list-inside space-y-2 ml-4">
 <li><strong>Never expose credentials in frontend:</strong> Always handle authentication server-side</li>
 <li><strong>Use environment variables:</strong> Store sensitive data in .env files</li>
@@ -370,18 +424,23 @@
 <div class="bg-yellow-50 p-4 rounded-lg mt-4 border-l-4 border-yellow-500">
 <p class="font-semibold text-yellow-800 flex items-center gap-2">
 <i class="fas fa-exclamation-triangle"></i>
-                                                                            Important Security Note
-                                                                        </p>
+                                                                                                                                                                                                                                                    Important Security Note
+                                                                                                                                                                                                                                                </p>
 <p class="text-yellow-700 mt-2">The current implementation stores credentials in localStorage which is NOT secure for production. Implement proper backend authentication.</p>
 </div>
 </div>
 </div>
-<div class="bg-white rounded-xl p-6 border-l-4 border-indigo-500">
-<div class="flex items-center gap-3 mb-4">
+</div>
+<div class="bg-white rounded-xl overflow-hidden border-2 border-gray-200">
+<div class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50" onclick="toggleAccordion('step6')">
+<div class="flex items-center gap-3">
 <span class="bg-indigo-500 text-white font-bold px-3 py-1 rounded-full text-sm">STEP 6</span>
 <h3 class="text-xl font-bold text-gray-800">Testing &amp; Deployment</h3>
 </div>
-<div class="space-y-3 text-gray-700">
+<i class="fas fa-chevron-down text-gray-400 transition-transform duration-200" id="step6-icon"></i>
+</div>
+<div class="tree-content px-6 pb-6" id="step6-content">
+<div class="space-y-3 text-gray-700 pt-4 border-t-2 border-gray-100">
 <p class="font-semibold text-gray-800">Local Testing:</p>
 <div class="bg-gray-50 p-4 rounded-lg font-mono text-sm">
 <pre class="text-gray-800">python app.py</pre>
@@ -393,6 +452,7 @@
 <li><strong>Google Cloud Run:</strong> Container-based deployment</li>
 <li><strong>DigitalOcean App Platform:</strong> Simple PaaS solution</li>
 </ul>
+</div>
 </div>
 </div>
 <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl p-6 text-white">
@@ -418,743 +478,730 @@
 </div>
 </div>
 </div>
-<div class="hidden animate__animated animate__fadeInUp" id="navigationTree">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-<div class="bg-white rounded-2xl card-shadow p-8">
-<div class="flex items-center justify-between mb-6">
-<h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
-<i class="fas fa-list-check text-purple-600"></i>
-                                            Rules
-                                        </h2>
-<span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-bold text-sm" id="rulesCount">0</span>
-</div>
-<div class="space-y-2 max-h-screen overflow-y-auto" id="rulesTree">
-</div>
-</div>
-<div class="bg-white rounded-2xl card-shadow p-8">
-<div class="flex items-center justify-between mb-6">
-<h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
-<i class="fas fa-database text-indigo-600"></i>
-                                            Data Elements
-                                        </h2>
-<span class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full font-bold text-sm" id="dataElementsCount">0</span>
-</div>
-<div class="space-y-2 max-h-screen overflow-y-auto" id="dataElementsTree">
-</div>
-</div>
-</div>
-</div>
 </div>
 <script>
-            let statusLog = [];
-            let propertyData = {
-                rules: [],
-                dataElements: []
-            };
-
-            const SAMPLE_RULES = [
-                {
-                    rule_name: "Page Load - Homepage",
-                    rule_id: "RL001",
-                    enabled: true,
-                    rule_order: 1,
-                    event_type: "Page Load",
-                    conditions: "URL contains '/home' OR URL equals '/'",
-                    actions: "Set Analytics Page Name, Fire Page View Beacon",
-                    last_modified: "2024-01-15T10:30:00Z"
-                },
-                {
-                    rule_name: "Click - Add to Cart",
-                    rule_id: "RL002",
-                    enabled: true,
-                    rule_order: 2,
-                    event_type: "Click",
-                    conditions: "Element matches CSS selector '.add-to-cart-btn'",
-                    actions: "Track Cart Addition Event, Update Cart Data Layer",
-                    last_modified: "2024-01-14T14:22:00Z"
-                },
-                {
-                    rule_name: "Form Submit - Newsletter Signup",
-                    rule_id: "RL003",
-                    enabled: true,
-                    rule_order: 3,
-                    event_type: "Form Submission",
-                    conditions: "Form ID equals 'newsletter-form'",
-                    actions: "Track Form Submission, Set User Preference Cookie",
-                    last_modified: "2024-01-13T09:15:00Z"
-                },
-                {
-                    rule_name: "Page Load - Product Detail",
-                    rule_id: "RL004",
-                    enabled: true,
-                    rule_order: 4,
-                    event_type: "Page Load",
-                    conditions: "URL contains '/product/'",
-                    actions: "Set Product Variables, Fire Product View Event",
-                    last_modified: "2024-01-12T16:45:00Z"
-                },
-                {
-                    rule_name: "Click - Checkout Button",
-                    rule_id: "RL005",
-                    enabled: true,
-                    rule_order: 5,
-                    event_type: "Click",
-                    conditions: "Element matches CSS selector '#checkout-btn'",
-                    actions: "Track Checkout Initiation, Set Checkout Step",
-                    last_modified: "2024-01-11T11:30:00Z"
-                },
-                {
-                    rule_name: "Custom Event - Video Play",
-                    rule_id: "RL006",
-                    enabled: true,
-                    rule_order: 6,
-                    event_type: "Custom Event",
-                    conditions: "Event name equals 'videoPlay'",
-                    actions: "Track Video Engagement, Update Media Analytics",
-                    last_modified: "2024-01-10T13:20:00Z"
-                },
-                {
-                    rule_name: "Page Load - Search Results",
-                    rule_id: "RL007",
-                    enabled: true,
-                    rule_order: 7,
-                    event_type: "Page Load",
-                    conditions: "URL contains '/search'",
-                    actions: "Track Search Query, Set Search Results Count",
-                    last_modified: "2024-01-09T08:55:00Z"
-                },
-                {
-                    rule_name: "Click - Social Share",
-                    rule_id: "RL008",
-                    enabled: false,
-                    rule_order: 8,
-                    event_type: "Click",
-                    conditions: "Element class contains 'social-share'",
-                    actions: "Track Social Share Event, Set Share Platform",
-                    last_modified: "2024-01-08T15:10:00Z"
-                },
-                {
-                    rule_name: "Page Load - Category Page",
-                    rule_id: "RL009",
-                    enabled: true,
-                    rule_order: 9,
-                    event_type: "Page Load",
-                    conditions: "URL contains '/category/'",
-                    actions: "Set Category Variables, Fire Category View",
-                    last_modified: "2024-01-07T10:25:00Z"
-                },
-                {
-                    rule_name: "Form Submit - Contact Form",
-                    rule_id: "RL010",
-                    enabled: true,
-                    rule_order: 10,
-                    event_type: "Form Submission",
-                    conditions: "Form ID equals 'contact-form'",
-                    actions: "Track Contact Submission, Set Lead Source",
-                    last_modified: "2024-01-06T14:40:00Z"
-                },
-                {
-                    rule_name: "Click - Remove from Cart",
-                    rule_id: "RL011",
-                    enabled: true,
-                    rule_order: 11,
-                    event_type: "Click",
-                    conditions: "Element matches CSS selector '.remove-item'",
-                    actions: "Track Cart Removal, Update Cart Total",
-                    last_modified: "2024-01-05T09:30:00Z"
-                },
-                {
-                    rule_name: "Page Load - Order Confirmation",
-                    rule_id: "RL012",
-                    enabled: true,
-                    rule_order: 12,
-                    event_type: "Page Load",
-                    conditions: "URL contains '/order-confirmation'",
-                    actions: "Track Purchase Event, Clear Cart Data",
-                    last_modified: "2024-01-04T16:15:00Z"
-                },
-                {
-                    rule_name: "Custom Event - Scroll Depth",
-                    rule_id: "RL013",
-                    enabled: true,
-                    rule_order: 13,
-                    event_type: "Custom Event",
-                    conditions: "Event name equals 'scrollDepth'",
-                    actions: "Track Scroll Milestone, Set Engagement Score",
-                    last_modified: "2024-01-03T11:50:00Z"
-                },
-                {
-                    rule_name: "Click - Filter Products",
-                    rule_id: "RL014",
-                    enabled: true,
-                    rule_order: 14,
-                    event_type: "Click",
-                    conditions: "Element class contains 'filter-option'",
-                    actions: "Track Filter Selection, Update Product List",
-                    last_modified: "2024-01-02T13:35:00Z"
-                },
-                {
-                    rule_name: "Page Load - User Account",
-                    rule_id: "RL015",
-                    enabled: true,
-                    rule_order: 15,
-                    event_type: "Page Load",
-                    conditions: "URL contains '/account'",
-                    actions: "Set User ID, Track Account Page View",
-                    last_modified: "2024-01-01T10:20:00Z"
-                }
-            ];
-
-            const SAMPLE_DATA_ELEMENTS = [
-                {
-                    element_name: "Page Name",
-                    element_id: "DE001",
-                    element_type: "JavaScript Variable",
-                    default_value: "document.title",
-                    storage_duration: "Page View",
-                    clean_text: true,
-                    enabled: true,
-                    last_modified: "2024-01-15T10:30:00Z",
-                    source_code: "return document.title || 'Untitled Page';"
-                },
-                {
-                    element_name: "User ID",
-                    element_id: "DE002",
-                    element_type: "Cookie",
-                    default_value: "",
-                    storage_duration: "Session",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-14T14:22:00Z"
-                },
-                {
-                    element_name: "Cart Total",
-                    element_id: "DE003",
-                    element_type: "Custom Code",
-                    default_value: "0",
-                    storage_duration: "Page View",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-13T09:15:00Z",
-                    source_code: "var cart = window.dataLayer.find(function(item) { return item.event === 'cart'; });\nreturn cart ? cart.total : 0;"
-                },
-                {
-                    element_name: "Product SKU",
-                    element_id: "DE004",
-                    element_type: "CSS Selector",
-                    default_value: "",
-                    storage_duration: "Page View",
-                    clean_text: true,
-                    enabled: true,
-                    last_modified: "2024-01-12T16:45:00Z"
-                },
-                {
-                    element_name: "Current URL",
-                    element_id: "DE005",
-                    element_type: "JavaScript Variable",
-                    default_value: "window.location.href",
-                    storage_duration: "Page View",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-11T11:30:00Z",
-                    source_code: "return window.location.href;"
-                },
-                {
-                    element_name: "Session ID",
-                    element_id: "DE006",
-                    element_type: "Cookie",
-                    default_value: "",
-                    storage_duration: "Session",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-10T13:20:00Z"
-                },
-                {
-                    element_name: "Search Query",
-                    element_id: "DE007",
-                    element_type: "Query String Parameter",
-                    default_value: "",
-                    storage_duration: "Page View",
-                    clean_text: true,
-                    enabled: true,
-                    last_modified: "2024-01-09T08:55:00Z"
-                },
-                {
-                    element_name: "User Email",
-                    element_id: "DE008",
-                    element_type: "Custom Code",
-                    default_value: "",
-                    storage_duration: "Visitor",
-                    clean_text: true,
-                    enabled: true,
-                    last_modified: "2024-01-08T15:10:00Z",
-                    source_code: "var user = window.currentUser || {};\nreturn user.email || '';"
-                },
-                {
-                    element_name: "Category Name",
-                    element_id: "DE009",
-                    element_type: "JavaScript Variable",
-                    default_value: "",
-                    storage_duration: "Page View",
-                    clean_text: true,
-                    enabled: true,
-                    last_modified: "2024-01-07T10:25:00Z",
-                    source_code: "return window.categoryName || '';"
-                },
-                {
-                    element_name: "Device Type",
-                    element_id: "DE010",
-                    element_type: "Custom Code",
-                    default_value: "desktop",
-                    storage_duration: "Session",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-06T14:40:00Z",
-                    source_code: "var width = window.innerWidth;\nif (width < 768) return 'mobile';\nif (width < 1024) return 'tablet';\nreturn 'desktop';"
-                },
-                {
-                    element_name: "Cart Item Count",
-                    element_id: "DE011",
-                    element_type: "JavaScript Variable",
-                    default_value: "0",
-                    storage_duration: "Page View",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-05T09:30:00Z",
-                    source_code: "return window.cart ? window.cart.items.length : 0;"
-                },
-                {
-                    element_name: "Order ID",
-                    element_id: "DE012",
-                    element_type: "Data Layer",
-                    default_value: "",
-                    storage_duration: "Page View",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-04T16:15:00Z"
-                },
-                {
-                    element_name: "Page Type",
-                    element_id: "DE013",
-                    element_type: "Custom Code",
-                    default_value: "other",
-                    storage_duration: "Page View",
-                    clean_text: true,
-                    enabled: true,
-                    last_modified: "2024-01-03T11:50:00Z",
-                    source_code: "var path = window.location.pathname;\nif (path === '/') return 'home';\nif (path.includes('/product/')) return 'product';\nif (path.includes('/category/')) return 'category';\nreturn 'other';"
-                },
-                {
-                    element_name: "Logged In Status",
-                    element_id: "DE014",
-                    element_type: "JavaScript Variable",
-                    default_value: "false",
-                    storage_duration: "Session",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-02T13:35:00Z",
-                    source_code: "return window.isLoggedIn ? 'true' : 'false';"
-                },
-                {
-                    element_name: "Referrer URL",
-                    element_id: "DE015",
-                    element_type: "JavaScript Variable",
-                    default_value: "",
-                    storage_duration: "Session",
-                    clean_text: false,
-                    enabled: true,
-                    last_modified: "2024-01-01T10:20:00Z",
-                    source_code: "return document.referrer;"
-                }
-            ];
-
-            function saveToLocalStorage() {
-                const orgId = document.getElementById('orgId').value.trim();
-                const clientId = document.getElementById('clientId').value.trim();
-                const techAccountId = document.getElementById('techAccountId').value.trim();
-                const privateKeyPath = document.getElementById('privateKeyPath').value.trim();
-                const propertyId = document.getElementById('propertyId').value.trim();
-
-                if (orgId) localStorage.setItem('adobeLaunch_orgId', orgId);
-                if (clientId) localStorage.setItem('adobeLaunch_clientId', clientId);
-                if (techAccountId) localStorage.setItem('adobeLaunch_techAccountId', techAccountId);
-                if (privateKeyPath) localStorage.setItem('adobeLaunch_privateKeyPath', privateKeyPath);
-                if (propertyId) localStorage.setItem('adobeLaunch_propertyId', propertyId);
-                
-                console.log('[STORAGE] Saved credentials to localStorage');
-            }
-
-            function loadFromLocalStorage() {
-                const orgId = localStorage.getItem('adobeLaunch_orgId');
-                const clientId = localStorage.getItem('adobeLaunch_clientId');
-                const techAccountId = localStorage.getItem('adobeLaunch_techAccountId');
-                const privateKeyPath = localStorage.getItem('adobeLaunch_privateKeyPath');
-                const propertyId = localStorage.getItem('adobeLaunch_propertyId');
-
-                if (orgId) document.getElementById('orgId').value = orgId;
-                if (clientId) document.getElementById('clientId').value = clientId;
-                if (techAccountId) document.getElementById('techAccountId').value = techAccountId;
-                if (privateKeyPath) document.getElementById('privateKeyPath').value = privateKeyPath;
-                if (propertyId) document.getElementById('propertyId').value = propertyId;
-                
-                console.log('[STORAGE] Loaded credentials from localStorage:', {
-                    hasOrgId: !!orgId,
-                    hasClientId: !!clientId,
-                    hasTechAccountId: !!techAccountId,
-                    hasPrivateKeyPath: !!privateKeyPath,
-                    hasPropertyId: !!propertyId
-                });
-            }
-
-            function addStatus(message, type = 'info') {
-                const timestamp = new Date().toLocaleTimeString();
-                const statusItem = {
-                    message,
-                    type,
-                    timestamp
+                let statusLog = [];
+                let propertyData = {
+                    rules: [],
+                    dataElements: []
                 };
-                statusLog.push(statusItem);
-            
-                const logContainer = document.getElementById('statusLog');
-                const statusDiv = document.createElement('div');
-                statusDiv.className = 'status-item flex items-start gap-3 p-3 rounded-lg ' + 
-                    (type === 'success' ? 'bg-green-50 border-l-4 border-green-500' : 
-                     type === 'error' ? 'bg-red-50 border-l-4 border-red-500' : 
-                     type === 'warning' ? 'bg-yellow-50 border-l-4 border-yellow-500' : 
-                     'bg-blue-50 border-l-4 border-blue-500');
-            
-                const icon = type === 'success' ? 'fa-check-circle text-green-500' :
-                            type === 'error' ? 'fa-times-circle text-red-500' :
-                            type === 'warning' ? 'fa-exclamation-triangle text-yellow-500' :
-                            'fa-info-circle text-blue-500';
-            
-                statusDiv.innerHTML = `
-                    <i class="fas ${icon} text-xl mt-1"></i>
-                    <div class="flex-1">
-                        <p class="font-semibold text-gray-800">${message}</p>
-                        <p class="text-xs text-gray-500 mt-1">${timestamp}</p>
-                    </div>
-                `;
-            
-                logContainer.appendChild(statusDiv);
-                logContainer.scrollTop = logContainer.scrollHeight;
+
+                const SAMPLE_RULES = [
+                    {
+                        rule_name: "Page Load - Homepage",
+                        rule_id: "RL001",
+                        enabled: true,
+                        rule_order: 1,
+                        event_type: "Page Load",
+                        conditions: "URL contains '/home' OR URL equals '/'",
+                        actions: "Set Analytics Page Name, Fire Page View Beacon",
+                        last_modified: "2024-01-15T10:30:00Z"
+                    },
+                    {
+                        rule_name: "Click - Add to Cart",
+                        rule_id: "RL002",
+                        enabled: true,
+                        rule_order: 2,
+                        event_type: "Click",
+                        conditions: "Element matches CSS selector '.add-to-cart-btn'",
+                        actions: "Track Cart Addition Event, Update Cart Data Layer",
+                        last_modified: "2024-01-14T14:22:00Z"
+                    },
+                    {
+                        rule_name: "Form Submit - Newsletter Signup",
+                        rule_id: "RL003",
+                        enabled: true,
+                        rule_order: 3,
+                        event_type: "Form Submission",
+                        conditions: "Form ID equals 'newsletter-form'",
+                        actions: "Track Form Submission, Set User Preference Cookie",
+                        last_modified: "2024-01-13T09:15:00Z"
+                    },
+                    {
+                        rule_name: "Page Load - Product Detail",
+                        rule_id: "RL004",
+                        enabled: true,
+                        rule_order: 4,
+                        event_type: "Page Load",
+                        conditions: "URL contains '/product/'",
+                        actions: "Set Product Variables, Fire Product View Event",
+                        last_modified: "2024-01-12T16:45:00Z"
+                    },
+                    {
+                        rule_name: "Click - Checkout Button",
+                        rule_id: "RL005",
+                        enabled: true,
+                        rule_order: 5,
+                        event_type: "Click",
+                        conditions: "Element matches CSS selector '#checkout-btn'",
+                        actions: "Track Checkout Initiation, Set Checkout Step",
+                        last_modified: "2024-01-11T11:30:00Z"
+                    },
+                    {
+                        rule_name: "Custom Event - Video Play",
+                        rule_id: "RL006",
+                        enabled: true,
+                        rule_order: 6,
+                        event_type: "Custom Event",
+                        conditions: "Event name equals 'videoPlay'",
+                        actions: "Track Video Engagement, Update Media Analytics",
+                        last_modified: "2024-01-10T13:20:00Z"
+                    },
+                    {
+                        rule_name: "Page Load - Search Results",
+                        rule_id: "RL007",
+                        enabled: true,
+                        rule_order: 7,
+                        event_type: "Page Load",
+                        conditions: "URL contains '/search'",
+                        actions: "Track Search Query, Set Search Results Count",
+                        last_modified: "2024-01-09T08:55:00Z"
+                    },
+                    {
+                        rule_name: "Click - Social Share",
+                        rule_id: "RL008",
+                        enabled: false,
+                        rule_order: 8,
+                        event_type: "Click",
+                        conditions: "Element class contains 'social-share'",
+                        actions: "Track Social Share Event, Set Share Platform",
+                        last_modified: "2024-01-08T15:10:00Z"
+                    },
+                    {
+                        rule_name: "Page Load - Category Page",
+                        rule_id: "RL009",
+                        enabled: true,
+                        rule_order: 9,
+                        event_type: "Page Load",
+                        conditions: "URL contains '/category/'",
+                        actions: "Set Category Variables, Fire Category View",
+                        last_modified: "2024-01-07T10:25:00Z"
+                    },
+                    {
+                        rule_name: "Form Submit - Contact Form",
+                        rule_id: "RL010",
+                        enabled: true,
+                        rule_order: 10,
+                        event_type: "Form Submission",
+                        conditions: "Form ID equals 'contact-form'",
+                        actions: "Track Contact Submission, Set Lead Source",
+                        last_modified: "2024-01-06T14:40:00Z"
+                    },
+                    {
+                        rule_name: "Click - Remove from Cart",
+                        rule_id: "RL011",
+                        enabled: true,
+                        rule_order: 11,
+                        event_type: "Click",
+                        conditions: "Element matches CSS selector '.remove-item'",
+                        actions: "Track Cart Removal, Update Cart Total",
+                        last_modified: "2024-01-05T09:30:00Z"
+                    },
+                    {
+                        rule_name: "Page Load - Order Confirmation",
+                        rule_id: "RL012",
+                        enabled: true,
+                        rule_order: 12,
+                        event_type: "Page Load",
+                        conditions: "URL contains '/order-confirmation'",
+                        actions: "Track Purchase Event, Clear Cart Data",
+                        last_modified: "2024-01-04T16:15:00Z"
+                    },
+                    {
+                        rule_name: "Custom Event - Scroll Depth",
+                        rule_id: "RL013",
+                        enabled: true,
+                        rule_order: 13,
+                        event_type: "Custom Event",
+                        conditions: "Event name equals 'scrollDepth'",
+                        actions: "Track Scroll Milestone, Set Engagement Score",
+                        last_modified: "2024-01-03T11:50:00Z"
+                    },
+                    {
+                        rule_name: "Click - Filter Products",
+                        rule_id: "RL014",
+                        enabled: true,
+                        rule_order: 14,
+                        event_type: "Click",
+                        conditions: "Element class contains 'filter-option'",
+                        actions: "Track Filter Selection, Update Product List",
+                        last_modified: "2024-01-02T13:35:00Z"
+                    },
+                    {
+                        rule_name: "Page Load - User Account",
+                        rule_id: "RL015",
+                        enabled: true,
+                        rule_order: 15,
+                        event_type: "Page Load",
+                        conditions: "URL contains '/account'",
+                        actions: "Set User ID, Track Account Page View",
+                        last_modified: "2024-01-01T10:20:00Z"
+                    }
+                ];
+
+                const SAMPLE_DATA_ELEMENTS = [
+                    {
+                        element_name: "Page Name",
+                        element_id: "DE001",
+                        element_type: "JavaScript Variable",
+                        default_value: "document.title",
+                        storage_duration: "Page View",
+                        clean_text: true,
+                        enabled: true,
+                        last_modified: "2024-01-15T10:30:00Z",
+                        source_code: "return document.title || 'Untitled Page';"
+                    },
+                    {
+                        element_name: "User ID",
+                        element_id: "DE002",
+                        element_type: "Cookie",
+                        default_value: "",
+                        storage_duration: "Session",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-14T14:22:00Z"
+                    },
+                    {
+                        element_name: "Cart Total",
+                        element_id: "DE003",
+                        element_type: "Custom Code",
+                        default_value: "0",
+                        storage_duration: "Page View",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-13T09:15:00Z",
+                        source_code: "var cart = window.dataLayer.find(function(item) { return item.event === 'cart'; });\nreturn cart ? cart.total : 0;"
+                    },
+                    {
+                        element_name: "Product SKU",
+                        element_id: "DE004",
+                        element_type: "CSS Selector",
+                        default_value: "",
+                        storage_duration: "Page View",
+                        clean_text: true,
+                        enabled: true,
+                        last_modified: "2024-01-12T16:45:00Z"
+                    },
+                    {
+                        element_name: "Current URL",
+                        element_id: "DE005",
+                        element_type: "JavaScript Variable",
+                        default_value: "window.location.href",
+                        storage_duration: "Page View",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-11T11:30:00Z",
+                        source_code: "return window.location.href;"
+                    },
+                    {
+                        element_name: "Session ID",
+                        element_id: "DE006",
+                        element_type: "Cookie",
+                        default_value: "",
+                        storage_duration: "Session",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-10T13:20:00Z"
+                    },
+                    {
+                        element_name: "Search Query",
+                        element_id: "DE007",
+                        element_type: "Query String Parameter",
+                        default_value: "",
+                        storage_duration: "Page View",
+                        clean_text: true,
+                        enabled: true,
+                        last_modified: "2024-01-09T08:55:00Z"
+                    },
+                    {
+                        element_name: "User Email",
+                        element_id: "DE008",
+                        element_type: "Custom Code",
+                        default_value: "",
+                        storage_duration: "Visitor",
+                        clean_text: true,
+                        enabled: true,
+                        last_modified: "2024-01-08T15:10:00Z",
+                        source_code: "var user = window.currentUser || {};\nreturn user.email || '';"
+                    },
+                    {
+                        element_name: "Category Name",
+                        element_id: "DE009",
+                        element_type: "JavaScript Variable",
+                        default_value: "",
+                        storage_duration: "Page View",
+                        clean_text: true,
+                        enabled: true,
+                        last_modified: "2024-01-07T10:25:00Z",
+                        source_code: "return window.categoryName || '';"
+                    },
+                    {
+                        element_name: "Device Type",
+                        element_id: "DE010",
+                        element_type: "Custom Code",
+                        default_value: "desktop",
+                        storage_duration: "Session",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-06T14:40:00Z",
+                        source_code: "var width = window.innerWidth;\nif (width < 768) return 'mobile';\nif (width < 1024) return 'tablet';\nreturn 'desktop';"
+                    },
+                    {
+                        element_name: "Cart Item Count",
+                        element_id: "DE011",
+                        element_type: "JavaScript Variable",
+                        default_value: "0",
+                        storage_duration: "Page View",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-05T09:30:00Z",
+                        source_code: "return window.cart ? window.cart.items.length : 0;"
+                    },
+                    {
+                        element_name: "Order ID",
+                        element_id: "DE012",
+                        element_type: "Data Layer",
+                        default_value: "",
+                        storage_duration: "Page View",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-04T16:15:00Z"
+                    },
+                    {
+                        element_name: "Page Type",
+                        element_id: "DE013",
+                        element_type: "Custom Code",
+                        default_value: "other",
+                        storage_duration: "Page View",
+                        clean_text: true,
+                        enabled: true,
+                        last_modified: "2024-01-03T11:50:00Z",
+                        source_code: "var path = window.location.pathname;\nif (path === '/') return 'home';\nif (path.includes('/product/')) return 'product';\nif (path.includes('/category/')) return 'category';\nreturn 'other';"
+                    },
+                    {
+                        element_name: "Logged In Status",
+                        element_id: "DE014",
+                        element_type: "JavaScript Variable",
+                        default_value: "false",
+                        storage_duration: "Session",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-02T13:35:00Z",
+                        source_code: "return window.isLoggedIn ? 'true' : 'false';"
+                    },
+                    {
+                        element_name: "Referrer URL",
+                        element_id: "DE015",
+                        element_type: "JavaScript Variable",
+                        default_value: "",
+                        storage_duration: "Session",
+                        clean_text: false,
+                        enabled: true,
+                        last_modified: "2024-01-01T10:20:00Z",
+                        source_code: "return document.referrer;"
+                    }
+                ];
+
+                function saveToLocalStorage() {
+                    const orgId = document.getElementById('orgId').value.trim();
+                    const clientId = document.getElementById('clientId').value.trim();
+                    const techAccountId = document.getElementById('techAccountId').value.trim();
+                    const privateKeyPath = document.getElementById('privateKeyPath').value.trim();
+                    const propertyId = document.getElementById('propertyId').value.trim();
+
+                    if (orgId) localStorage.setItem('adobeLaunch_orgId', orgId);
+                    if (clientId) localStorage.setItem('adobeLaunch_clientId', clientId);
+                    if (techAccountId) localStorage.setItem('adobeLaunch_techAccountId', techAccountId);
+                    if (privateKeyPath) localStorage.setItem('adobeLaunch_privateKeyPath', privateKeyPath);
+                    if (propertyId) localStorage.setItem('adobeLaunch_propertyId', propertyId);
                 
-                console.log(`[STATUS:${type.toUpperCase()}] ${message}`);
-            }
+                    console.log('[STORAGE] Saved credentials to localStorage');
+                }
 
-            function updateProgress(percent) {
-                const progressBar = document.getElementById('progressBar');
-                const progressPercent = document.getElementById('progressPercent');
-                progressBar.style.width = percent + '%';
-                progressPercent.textContent = percent + '%';
+                function loadFromLocalStorage() {
+                    const orgId = localStorage.getItem('adobeLaunch_orgId');
+                    const clientId = localStorage.getItem('adobeLaunch_clientId');
+                    const techAccountId = localStorage.getItem('adobeLaunch_techAccountId');
+                    const privateKeyPath = localStorage.getItem('adobeLaunch_privateKeyPath');
+                    const propertyId = localStorage.getItem('adobeLaunch_propertyId');
+
+                    if (orgId) document.getElementById('orgId').value = orgId;
+                    if (clientId) document.getElementById('clientId').value = clientId;
+                    if (techAccountId) document.getElementById('techAccountId').value = techAccountId;
+                    if (privateKeyPath) document.getElementById('privateKeyPath').value = privateKeyPath;
+                    if (propertyId) document.getElementById('propertyId').value = propertyId;
                 
-                console.log(`[PROGRESS] ${percent}%`);
-            }
+                    console.log('[STORAGE] Loaded credentials from localStorage:', {
+                        hasOrgId: !!orgId,
+                        hasClientId: !!clientId,
+                        hasTechAccountId: !!techAccountId,
+                        hasPrivateKeyPath: !!privateKeyPath,
+                        hasPropertyId: !!propertyId
+                    });
+                }
 
-            function createRuleTreeItem(rule, index) {
-                const itemId = `rule-${index}`;
-                const enabledBadge = rule.enabled ? 
-                    '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-semibold">Enabled</span>' :
-                    '<span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-semibold">Disabled</span>';
+                function addStatus(message, type = 'info') {
+                    const timestamp = new Date().toLocaleTimeString();
+                    const statusItem = {
+                        message,
+                        type,
+                        timestamp
+                    };
+                    statusLog.push(statusItem);
             
-                const conditionsSourceCode = rule.conditions_source_code ? `
-                    <div>
-                        <p class="text-xs font-semibold text-gray-500 mb-2">Conditions Source Code</p>
-                        <div class="bg-gray-50 text-gray-800 p-4 rounded border-2 border-gray-300 font-mono text-xs overflow-x-auto">
-                            <pre class="whitespace-pre-wrap">${rule.conditions_source_code}</pre>
-                        </div>
-                    </div>
-                ` : '';
-
-                const actionsSourceCode = rule.actions_source_code ? `
-                    <div>
-                        <p class="text-xs font-semibold text-gray-500 mb-2">Actions Source Code</p>
-                        <div class="bg-gray-50 text-gray-800 p-4 rounded border-2 border-gray-300 font-mono text-xs overflow-x-auto">
-                            <pre class="whitespace-pre-wrap">${rule.actions_source_code}</pre>
-                        </div>
-                    </div>
-                ` : '';
-
-                return `
-                    <div class="tree-item border-2 border-gray-200 rounded-lg overflow-hidden">
-                        <div class="flex items-center justify-between p-4 cursor-pointer hover:bg-purple-50" onclick="toggleTreeItem('${itemId}')">
-                            <div class="flex items-center gap-3 flex-1">
-                                <i id="${itemId}-icon" class="fas fa-chevron-right text-purple-600 transition-transform duration-200"></i>
-                                <div class="flex-1">
-                                    <h3 class="font-bold text-gray-800">${rule.rule_name}</h3>
-                                    <p class="text-sm text-gray-500">${rule.event_type}</p>
-                                </div>
-                            </div>
-                            ${enabledBadge}
-                        </div>
-                        <div id="${itemId}-content" class="tree-content bg-gray-50 px-4 pb-4">
-                            <div class="space-y-3 pt-4">
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-xs font-semibold text-gray-500 mb-1">Rule ID</p>
-                                        <p class="text-sm text-gray-800 font-mono">${rule.rule_id}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-gray-500 mb-1">Rule Order</p>
-                                        <p class="text-sm text-gray-800">${rule.rule_order}</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="text-xs font-semibold text-gray-500 mb-1">Conditions</p>
-                                    <p class="text-sm text-gray-800 bg-white p-2 rounded border border-gray-200">${rule.conditions}</p>
-                                </div>
-                                ${conditionsSourceCode}
-                                <div>
-                                    <p class="text-xs font-semibold text-gray-500 mb-1">Actions</p>
-                                    <p class="text-sm text-gray-800 bg-white p-2 rounded border border-gray-200">${rule.actions}</p>
-                                </div>
-                                ${actionsSourceCode}
-                                <div>
-                                    <p class="text-xs font-semibold text-gray-500 mb-1">Last Modified</p>
-                                    <p class="text-sm text-gray-800">${rule.last_modified}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            function createDataElementTreeItem(element, index) {
-                const itemId = `element-${index}`;
-                const enabledBadge = element.enabled ? 
-                    '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-semibold">Enabled</span>' :
-                    '<span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-semibold">Disabled</span>';
+                    const logContainer = document.getElementById('statusLog');
+                    const statusDiv = document.createElement('div');
+                    statusDiv.className = 'status-item flex items-start gap-3 p-3 rounded-lg ' + 
+                        (type === 'success' ? 'bg-green-50 border-l-4 border-green-500' : 
+                         type === 'error' ? 'bg-red-50 border-l-4 border-red-500' : 
+                         type === 'warning' ? 'bg-yellow-50 border-l-4 border-yellow-500' : 
+                         'bg-blue-50 border-l-4 border-blue-500');
             
-                const sourceCodeSection = element.source_code ? `
-                    <div>
-                        <p class="text-xs font-semibold text-gray-500 mb-2">Source Code</p>
-                        <div class="bg-gray-50 text-gray-800 p-4 rounded border-2 border-gray-300 font-mono text-xs overflow-x-auto">
-                            <pre class="whitespace-pre-wrap">${element.source_code}</pre>
+                    const icon = type === 'success' ? 'fa-check-circle text-green-500' :
+                                type === 'error' ? 'fa-times-circle text-red-500' :
+                                type === 'warning' ? 'fa-exclamation-triangle text-yellow-500' :
+                                'fa-info-circle text-blue-500';
+            
+                    statusDiv.innerHTML = `
+                        <i class="fas ${icon} text-xl mt-1"></i>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-800">${message}</p>
+                            <p class="text-xs text-gray-500 mt-1">${timestamp}</p>
                         </div>
-                    </div>
-                ` : '';
+                    `;
+            
+                    logContainer.appendChild(statusDiv);
+                    logContainer.scrollTop = logContainer.scrollHeight;
+                
+                    console.log(`[STATUS:${type.toUpperCase()}] ${message}`);
+                }
 
-                return `
-                    <div class="tree-item border-2 border-gray-200 rounded-lg overflow-hidden">
-                        <div class="flex items-center justify-between p-4 cursor-pointer hover:bg-indigo-50" onclick="toggleTreeItem('${itemId}')">
-                            <div class="flex items-center gap-3 flex-1">
-                                <i id="${itemId}-icon" class="fas fa-chevron-right text-indigo-600 transition-transform duration-200"></i>
-                                <div class="flex-1">
-                                    <h3 class="font-bold text-gray-800">${element.element_name}</h3>
-                                    <p class="text-sm text-gray-500">${element.element_type}</p>
-                                </div>
+                function updateProgress(percent) {
+                    const progressBar = document.getElementById('progressBar');
+                    const progressPercent = document.getElementById('progressPercent');
+                    progressBar.style.width = percent + '%';
+                    progressPercent.textContent = percent + '%';
+                
+                    console.log(`[PROGRESS] ${percent}%`);
+                }
+
+                function createRuleTreeItem(rule, index) {
+                    const itemId = `rule-${index}`;
+                    const enabledBadge = rule.enabled ? 
+                        '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-semibold">Enabled</span>' :
+                        '<span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-semibold">Disabled</span>';
+            
+                    const conditionsSourceCode = rule.conditions_source_code ? `
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 mb-2">Conditions Source Code</p>
+                            <div class="bg-gray-50 text-gray-800 p-4 rounded border-2 border-gray-300 font-mono text-xs overflow-x-auto">
+                                <pre class="whitespace-pre-wrap">${rule.conditions_source_code}</pre>
                             </div>
-                            ${enabledBadge}
                         </div>
-                        <div id="${itemId}-content" class="tree-content bg-gray-50 px-4 pb-4">
-                            <div class="space-y-3 pt-4">
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-xs font-semibold text-gray-500 mb-1">Element ID</p>
-                                        <p class="text-sm text-gray-800 font-mono">${element.element_id}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-gray-500 mb-1">Storage Duration</p>
-                                        <p class="text-sm text-gray-800">${element.storage_duration}</p>
+                    ` : '';
+
+                    const actionsSourceCode = rule.actions_source_code ? `
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 mb-2">Actions Source Code</p>
+                            <div class="bg-gray-50 text-gray-800 p-4 rounded border-2 border-gray-300 font-mono text-xs overflow-x-auto">
+                                <pre class="whitespace-pre-wrap">${rule.actions_source_code}</pre>
+                            </div>
+                        </div>
+                    ` : '';
+
+                    return `
+                        <div class="tree-item border-2 border-gray-200 rounded-lg overflow-hidden">
+                            <div class="flex items-center justify-between p-4 cursor-pointer hover:bg-purple-50" onclick="toggleTreeItem('${itemId}')">
+                                <div class="flex items-center gap-3 flex-1">
+                                    <i id="${itemId}-icon" class="fas fa-chevron-right text-purple-600 transition-transform duration-200"></i>
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-gray-800">${rule.rule_name}</h3>
+                                        <p class="text-sm text-gray-500">${rule.event_type}</p>
                                     </div>
                                 </div>
-                                <div>
-                                    <p class="text-xs font-semibold text-gray-500 mb-1">Default Value</p>
-                                    <p class="text-sm text-gray-800 bg-white p-2 rounded border border-gray-200 font-mono">${element.default_value}</p>
-                                </div>
-                                ${sourceCodeSection}
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-xs font-semibold text-gray-500 mb-1">Clean Text</p>
-                                        <p class="text-sm text-gray-800">${element.clean_text ? 'Yes' : 'No'}</p>
+                                ${enabledBadge}
+                            </div>
+                            <div id="${itemId}-content" class="tree-content bg-gray-50 px-4 pb-4">
+                                <div class="space-y-3 pt-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <p class="text-xs font-semibold text-gray-500 mb-1">Rule ID</p>
+                                            <p class="text-sm text-gray-800 font-mono">${rule.rule_id}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs font-semibold text-gray-500 mb-1">Rule Order</p>
+                                            <p class="text-sm text-gray-800">${rule.rule_order}</p>
+                                        </div>
                                     </div>
+                                    <div>
+                                        <p class="text-xs font-semibold text-gray-500 mb-1">Conditions</p>
+                                        <p class="text-sm text-gray-800 bg-white p-2 rounded border border-gray-200">${rule.conditions}</p>
+                                    </div>
+                                    ${conditionsSourceCode}
+                                    <div>
+                                        <p class="text-xs font-semibold text-gray-500 mb-1">Actions</p>
+                                        <p class="text-sm text-gray-800 bg-white p-2 rounded border border-gray-200">${rule.actions}</p>
+                                    </div>
+                                    ${actionsSourceCode}
                                     <div>
                                         <p class="text-xs font-semibold text-gray-500 mb-1">Last Modified</p>
-                                        <p class="text-sm text-gray-800">${element.last_modified}</p>
+                                        <p class="text-sm text-gray-800">${rule.last_modified}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                `;
-            }
-
-            function toggleTreeItem(itemId) {
-                const content = document.getElementById(`${itemId}-content`);
-                const icon = document.getElementById(`${itemId}-icon`);
-            
-                if (content.classList.contains('expanded')) {
-                    content.classList.remove('expanded');
-                    icon.classList.remove('rotate-90');
-                } else {
-                    content.classList.add('expanded');
-                    icon.classList.add('rotate-90');
+                    `;
                 }
-            }
 
-            function displayNavigationTree() {
-                console.log('[DISPLAY] Rendering navigation tree with data:', {
-                    rulesCount: propertyData.rules.length,
-                    dataElementsCount: propertyData.dataElements.length
+                function createDataElementTreeItem(element, index) {
+                    const itemId = `element-${index}`;
+                    const enabledBadge = element.enabled ? 
+                        '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-semibold">Enabled</span>' :
+                        '<span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-semibold">Disabled</span>';
+            
+                    const sourceCodeSection = element.source_code ? `
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 mb-2">Source Code</p>
+                            <div class="bg-gray-50 text-gray-800 p-4 rounded border-2 border-gray-300 font-mono text-xs overflow-x-auto">
+                                <pre class="whitespace-pre-wrap">${element.source_code}</pre>
+                            </div>
+                        </div>
+                    ` : '';
+
+                    return `
+                        <div class="tree-item border-2 border-gray-200 rounded-lg overflow-hidden">
+                            <div class="flex items-center justify-between p-4 cursor-pointer hover:bg-indigo-50" onclick="toggleTreeItem('${itemId}')">
+                                <div class="flex items-center gap-3 flex-1">
+                                    <i id="${itemId}-icon" class="fas fa-chevron-right text-indigo-600 transition-transform duration-200"></i>
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-gray-800">${element.element_name}</h3>
+                                        <p class="text-sm text-gray-500">${element.element_type}</p>
+                                    </div>
+                                </div>
+                                ${enabledBadge}
+                            </div>
+                            <div id="${itemId}-content" class="tree-content bg-gray-50 px-4 pb-4">
+                                <div class="space-y-3 pt-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <p class="text-xs font-semibold text-gray-500 mb-1">Element ID</p>
+                                            <p class="text-sm text-gray-800 font-mono">${element.element_id}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs font-semibold text-gray-500 mb-1">Storage Duration</p>
+                                            <p class="text-sm text-gray-800">${element.storage_duration}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-semibold text-gray-500 mb-1">Default Value</p>
+                                        <p class="text-sm text-gray-800 bg-white p-2 rounded border border-gray-200 font-mono">${element.default_value}</p>
+                                    </div>
+                                    ${sourceCodeSection}
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <p class="text-xs font-semibold text-gray-500 mb-1">Clean Text</p>
+                                            <p class="text-sm text-gray-800">${element.clean_text ? 'Yes' : 'No'}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs font-semibold text-gray-500 mb-1">Last Modified</p>
+                                            <p class="text-sm text-gray-800">${element.last_modified}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                function toggleTreeItem(itemId) {
+                    const content = document.getElementById(`${itemId}-content`);
+                    const icon = document.getElementById(`${itemId}-icon`);
+            
+                    if (content.classList.contains('expanded')) {
+                        content.classList.remove('expanded');
+                        icon.classList.remove('rotate-90');
+                    } else {
+                        content.classList.add('expanded');
+                        icon.classList.add('rotate-90');
+                    }
+                }
+
+                function toggleAccordion(stepId) {
+                    const content = document.getElementById(`${stepId}-content`);
+                    const icon = document.getElementById(`${stepId}-icon`);
+            
+                    if (content.classList.contains('expanded')) {
+                        content.classList.remove('expanded');
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.classList.add('expanded');
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                }
+
+                function displayNavigationTree() {
+                    console.log('[DISPLAY] Rendering navigation tree with data:', {
+                        rulesCount: propertyData.rules.length,
+                        dataElementsCount: propertyData.dataElements.length
+                    });
+                
+                    const rulesTree = document.getElementById('rulesTree');
+                    const dataElementsTree = document.getElementById('dataElementsTree');
+                    const navigationTree = document.getElementById('navigationTree');
+            
+                    rulesTree.innerHTML = propertyData.rules.map((rule, index) => createRuleTreeItem(rule, index)).join('');
+                    dataElementsTree.innerHTML = propertyData.dataElements.map((element, index) => createDataElementTreeItem(element, index)).join('');
+            
+                    document.getElementById('rulesCount').textContent = propertyData.rules.length;
+                    document.getElementById('dataElementsCount').textContent = propertyData.dataElements.length;
+            
+                    navigationTree.classList.remove('hidden');
+                
+                    console.log('[DISPLAY] Navigation tree rendered successfully');
+                }
+
+                async function loadLaunchPropertyData(credentials, propertyId) {
+                    console.log('[API] Starting Adobe Launch data load');
+                    console.log('[API] Using sample data from localStorage');
+                    console.log('[API] Property ID:', propertyId);
+                
+                    addStatus('Initializing Adobe Launch API connection...', 'info');
+                    updateProgress(10);
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                    console.log('[API] Simulating authentication...');
+                    addStatus('Authenticating with Adobe Launch...', 'info');
+                    updateProgress(20);
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                    console.log('[API] Authentication successful (simulated)');
+                    addStatus(`Connected to Property: ${propertyId}`, 'success');
+                    updateProgress(30);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+
+                    console.log('[API] Loading rules from sample data...');
+                    addStatus('Fetching rules from property...', 'info');
+                    updateProgress(50);
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                    const rulesData = { rules: SAMPLE_RULES };
+                    console.log(`[API] Successfully loaded ${rulesData.rules.length} rules`);
+                    addStatus(`Found ${rulesData.rules.length} rules`, 'success');
+                    updateProgress(70);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+
+                    console.log('[API] Loading data elements from sample data...');
+                    addStatus('Fetching data elements from property...', 'info');
+                    updateProgress(80);
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                    const dataElementsData = { data_elements: SAMPLE_DATA_ELEMENTS };
+                    console.log(`[API] Successfully loaded ${dataElementsData.data_elements.length} data elements`);
+                    addStatus(`Found ${dataElementsData.data_elements.length} data elements`, 'success');
+                    updateProgress(95);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+
+                    propertyData.rules = rulesData.rules;
+                    propertyData.dataElements = dataElementsData.data_elements;
+            
+                    console.log('[API] Final property data:', propertyData);
+                    console.log('[API] ℹ️ NOTE: This app is displaying SAMPLE DATA');
+                    console.log('[API] ℹ️ To load real data, implement actual Adobe Launch API calls with launchpy backend');
+                
+                    updateProgress(100);
+                    addStatus('All data successfully loaded!', 'success');
+                    addStatus('ℹ️ Note: Currently displaying sample data for demonstration', 'warning');
+            
+                    return propertyData;
+                }
+
+                document.getElementById('loadBtn').addEventListener('click', async function() {
+                    console.log('[BUTTON] Load button clicked');
+                
+                    const orgId = document.getElementById('orgId').value.trim();
+                    const clientId = document.getElementById('clientId').value.trim();
+                    const clientSecret = document.getElementById('clientSecret').value.trim();
+                    const techAccountId = document.getElementById('techAccountId').value.trim();
+                    const privateKeyPath = document.getElementById('privateKeyPath').value.trim();
+                    const propertyId = document.getElementById('propertyId').value.trim();
+
+                    console.log('[BUTTON] Form values:', {
+                        hasOrgId: !!orgId,
+                        hasClientId: !!clientId,
+                        hasClientSecret: !!clientSecret,
+                        hasTechAccountId: !!techAccountId,
+                        hasPrivateKeyPath: !!privateKeyPath,
+                        hasPropertyId: !!propertyId
+                    });
+
+                    if (!orgId || !clientId || !clientSecret || !techAccountId || !privateKeyPath || !propertyId) {
+                        console.warn('[BUTTON] Missing required fields');
+                        alert('Please fill in all credential fields and property ID');
+                        return;
+                    }
+
+                    saveToLocalStorage();
+
+                    const credentials = {
+                        orgId,
+                        clientId,
+                        clientSecret,
+                        techAccountId,
+                        privateKeyPath
+                    };
+
+                    const progressSection = document.getElementById('progressSection');
+                    const errorMessage = document.getElementById('errorMessage');
+                    const statusLogContainer = document.getElementById('statusLog');
+                    const navigationTree = document.getElementById('navigationTree');
+            
+                    progressSection.classList.remove('hidden');
+                    errorMessage.classList.add('hidden');
+                    navigationTree.classList.add('hidden');
+                    statusLogContainer.innerHTML = '';
+                    statusLog = [];
+                    updateProgress(0);
+
+                    this.disabled = true;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> Loading...';
+
+                    console.log('[BUTTON] Starting data load process...');
+
+                    try {
+                        const result = await loadLaunchPropertyData(credentials, propertyId);
+                
+                        console.log('[BUTTON] Data load successful, displaying tree');
+                        displayNavigationTree();
+                
+                        this.innerHTML = '<i class="fas fa-check text-xl"></i> Data Loaded';
+                        this.classList.remove('from-purple-600', 'to-indigo-600');
+                        this.classList.add('from-green-600', 'to-green-700');
+                
+                    } catch (error) {
+                        console.error('[BUTTON] Data load failed:', error);
+                        errorMessage.classList.remove('hidden');
+                        document.getElementById('errorText').textContent = error.message;
+                        this.innerHTML = '<i class="fas fa-sync-alt text-xl"></i> Load Property Data';
+                        this.disabled = false;
+                        addStatus('Load failed: ' + error.message, 'error');
+                    }
                 });
-                
-                const rulesTree = document.getElementById('rulesTree');
-                const dataElementsTree = document.getElementById('dataElementsTree');
-                const navigationTree = document.getElementById('navigationTree');
-            
-                rulesTree.innerHTML = propertyData.rules.map((rule, index) => createRuleTreeItem(rule, index)).join('');
-                dataElementsTree.innerHTML = propertyData.dataElements.map((element, index) => createDataElementTreeItem(element, index)).join('');
-            
-                document.getElementById('rulesCount').textContent = propertyData.rules.length;
-                document.getElementById('dataElementsCount').textContent = propertyData.dataElements.length;
-            
-                navigationTree.classList.remove('hidden');
-                
-                console.log('[DISPLAY] Navigation tree rendered successfully');
-            }
 
-            async function loadLaunchPropertyData(credentials, propertyId) {
-                console.log('[API] Starting Adobe Launch data load');
-                console.log('[API] Using sample data from localStorage');
-                console.log('[API] Property ID:', propertyId);
-                
-                addStatus('Initializing Adobe Launch API connection...', 'info');
-                updateProgress(10);
-                await new Promise(resolve => setTimeout(resolve, 500));
+                document.getElementById('orgId').addEventListener('input', saveToLocalStorage);
+                document.getElementById('clientId').addEventListener('input', saveToLocalStorage);
+                document.getElementById('techAccountId').addEventListener('input', saveToLocalStorage);
+                document.getElementById('privateKeyPath').addEventListener('input', saveToLocalStorage);
+                document.getElementById('propertyId').addEventListener('input', saveToLocalStorage);
 
-                console.log('[API] Simulating authentication...');
-                addStatus('Authenticating with Adobe Launch...', 'info');
-                updateProgress(20);
-                await new Promise(resolve => setTimeout(resolve, 500));
-
-                console.log('[API] Authentication successful (simulated)');
-                addStatus(`Connected to Property: ${propertyId}`, 'success');
-                updateProgress(30);
-                await new Promise(resolve => setTimeout(resolve, 300));
-
-                console.log('[API] Loading rules from sample data...');
-                addStatus('Fetching rules from property...', 'info');
-                updateProgress(50);
-                await new Promise(resolve => setTimeout(resolve, 500));
-
-                const rulesData = { rules: SAMPLE_RULES };
-                console.log(`[API] Successfully loaded ${rulesData.rules.length} rules`);
-                addStatus(`Found ${rulesData.rules.length} rules`, 'success');
-                updateProgress(70);
-                await new Promise(resolve => setTimeout(resolve, 300));
-
-                console.log('[API] Loading data elements from sample data...');
-                addStatus('Fetching data elements from property...', 'info');
-                updateProgress(80);
-                await new Promise(resolve => setTimeout(resolve, 500));
-
-                const dataElementsData = { data_elements: SAMPLE_DATA_ELEMENTS };
-                console.log(`[API] Successfully loaded ${dataElementsData.data_elements.length} data elements`);
-                addStatus(`Found ${dataElementsData.data_elements.length} data elements`, 'success');
-                updateProgress(95);
-                await new Promise(resolve => setTimeout(resolve, 300));
-
-                propertyData.rules = rulesData.rules;
-                propertyData.dataElements = dataElementsData.data_elements;
-            
-                console.log('[API] Final property data:', propertyData);
-                console.log('[API] ℹ️ NOTE: This app is displaying SAMPLE DATA');
-                console.log('[API] ℹ️ To load real data, implement actual Adobe Launch API calls with launchpy backend');
-                
-                updateProgress(100);
-                addStatus('All data successfully loaded!', 'success');
-                addStatus('ℹ️ Note: Currently displaying sample data for demonstration', 'warning');
-            
-                return propertyData;
-            }
-
-            document.getElementById('loadBtn').addEventListener('click', async function() {
-                console.log('[BUTTON] Load button clicked');
-                
-                const orgId = document.getElementById('orgId').value.trim();
-                const clientId = document.getElementById('clientId').value.trim();
-                const clientSecret = document.getElementById('clientSecret').value.trim();
-                const techAccountId = document.getElementById('techAccountId').value.trim();
-                const privateKeyPath = document.getElementById('privateKeyPath').value.trim();
-                const propertyId = document.getElementById('propertyId').value.trim();
-
-                console.log('[BUTTON] Form values:', {
-                    hasOrgId: !!orgId,
-                    hasClientId: !!clientId,
-                    hasClientSecret: !!clientSecret,
-                    hasTechAccountId: !!techAccountId,
-                    hasPrivateKeyPath: !!privateKeyPath,
-                    hasPropertyId: !!propertyId
+                window.addEventListener('load', function() {
+                    console.log('[INIT] Adobe Launch Property Inspector initializing...');
+                    loadFromLocalStorage();
+                    console.log('[INIT] Adobe Launch Property Inspector loaded successfully');
+                    console.log('[INIT] ℹ️ IMPORTANT: This app displays SAMPLE DATA for demonstration');
+                    console.log('[INIT] ℹ️ To connect to real Adobe Launch data, backend integration with launchpy is required');
+                    console.log('[INIT] ℹ️ Check console logs prefixed with [API] and [STORAGE] for debugging');
                 });
-
-                if (!orgId || !clientId || !clientSecret || !techAccountId || !privateKeyPath || !propertyId) {
-                    console.warn('[BUTTON] Missing required fields');
-                    alert('Please fill in all credential fields and property ID');
-                    return;
-                }
-
-                saveToLocalStorage();
-
-                const credentials = {
-                    orgId,
-                    clientId,
-                    clientSecret,
-                    techAccountId,
-                    privateKeyPath
-                };
-
-                const progressSection = document.getElementById('progressSection');
-                const errorMessage = document.getElementById('errorMessage');
-                const statusLogContainer = document.getElementById('statusLog');
-                const navigationTree = document.getElementById('navigationTree');
-            
-                progressSection.classList.remove('hidden');
-                errorMessage.classList.add('hidden');
-                navigationTree.classList.add('hidden');
-                statusLogContainer.innerHTML = '';
-                statusLog = [];
-                updateProgress(0);
-
-                this.disabled = true;
-                this.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> Loading...';
-
-                console.log('[BUTTON] Starting data load process...');
-
-                try {
-                    const result = await loadLaunchPropertyData(credentials, propertyId);
-                
-                    console.log('[BUTTON] Data load successful, displaying tree');
-                    displayNavigationTree();
-                
-                    this.innerHTML = '<i class="fas fa-check text-xl"></i> Data Loaded';
-                    this.classList.remove('from-purple-600', 'to-indigo-600');
-                    this.classList.add('from-green-600', 'to-green-700');
-                
-                } catch (error) {
-                    console.error('[BUTTON] Data load failed:', error);
-                    errorMessage.classList.remove('hidden');
-                    document.getElementById('errorText').textContent = error.message;
-                    this.innerHTML = '<i class="fas fa-sync-alt text-xl"></i> Load Property Data';
-                    this.disabled = false;
-                    addStatus('Load failed: ' + error.message, 'error');
-                }
-            });
-
-            document.getElementById('orgId').addEventListener('input', saveToLocalStorage);
-            document.getElementById('clientId').addEventListener('input', saveToLocalStorage);
-            document.getElementById('techAccountId').addEventListener('input', saveToLocalStorage);
-            document.getElementById('privateKeyPath').addEventListener('input', saveToLocalStorage);
-            document.getElementById('propertyId').addEventListener('input', saveToLocalStorage);
-
-            window.addEventListener('load', function() {
-                console.log('[INIT] Adobe Launch Property Inspector initializing...');
-                loadFromLocalStorage();
-                console.log('[INIT] Adobe Launch Property Inspector loaded successfully');
-                console.log('[INIT] ℹ️ IMPORTANT: This app displays SAMPLE DATA for demonstration');
-                console.log('[INIT] ℹ️ To connect to real Adobe Launch data, backend integration with launchpy is required');
-                console.log('[INIT] ℹ️ Check console logs prefixed with [API] and [STORAGE] for debugging');
-            });
         
-        </script>
-</body>
+            </script>
+</div></body>
 </html>
