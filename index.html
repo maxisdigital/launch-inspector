@@ -10,11 +10,11 @@
 <meta content="website" property="og:type"/>
 <link href="assets/img_32x32_bd90b16b.png" rel="icon" type="image/png"/>
 <title>Adobe Launch Property Downloader</title>
-<script src="assets/script_b440bb9a.js"></script>
-<link href="assets/style_266f9ab8.css" rel="stylesheet"/>
-<script crossorigin="" src="assets/script_5ce3bed9.js"></script>
-<link href="assets/style_9144c5d0.css" rel="stylesheet"/>
-<script src="assets/script_db017fd0.js"></script>
+<script src="assets/script_039f676d.js"></script>
+<link href="assets/style_ffd2d8a3.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_977303c8.js"></script>
+<link href="assets/style_4fd4088d.css" rel="stylesheet"/>
+<script src="assets/script_06ae05b9.js"></script>
 <style>
             @font-face {
                 font-family: 'Font Awesome 6 Free';
@@ -223,6 +223,8 @@
                 if (techAccountId) localStorage.setItem('adobeLaunch_techAccountId', techAccountId);
                 if (privateKeyPath) localStorage.setItem('adobeLaunch_privateKeyPath', privateKeyPath);
                 if (propertyId) localStorage.setItem('adobeLaunch_propertyId', propertyId);
+                
+                console.log('[STORAGE] Saved credentials to localStorage');
             }
 
             function loadFromLocalStorage() {
@@ -237,6 +239,14 @@
                 if (techAccountId) document.getElementById('techAccountId').value = techAccountId;
                 if (privateKeyPath) document.getElementById('privateKeyPath').value = privateKeyPath;
                 if (propertyId) document.getElementById('propertyId').value = propertyId;
+                
+                console.log('[STORAGE] Loaded credentials from localStorage:', {
+                    hasOrgId: !!orgId,
+                    hasClientId: !!clientId,
+                    hasTechAccountId: !!techAccountId,
+                    hasPrivateKeyPath: !!privateKeyPath,
+                    hasPropertyId: !!propertyId
+                });
             }
 
             function addStatus(message, type = 'info') {
@@ -271,6 +281,8 @@
             
                 logContainer.appendChild(statusDiv);
                 logContainer.scrollTop = logContainer.scrollHeight;
+                
+                console.log(`[STATUS:${type.toUpperCase()}] ${message}`);
             }
 
             function updateProgress(percent) {
@@ -278,6 +290,8 @@
                 const progressPercent = document.getElementById('progressPercent');
                 progressBar.style.width = percent + '%';
                 progressPercent.textContent = percent + '%';
+                
+                console.log(`[PROGRESS] ${percent}%`);
             }
 
 
@@ -428,6 +442,11 @@
             }
 
             function displayNavigationTree() {
+                console.log('[DISPLAY] Rendering navigation tree with data:', {
+                    rulesCount: propertyData.rules.length,
+                    dataElementsCount: propertyData.dataElements.length
+                });
+                
                 const rulesTree = document.getElementById('rulesTree');
                 const dataElementsTree = document.getElementById('dataElementsTree');
                 const navigationTree = document.getElementById('navigationTree');
@@ -439,27 +458,45 @@
                 document.getElementById('dataElementsCount').textContent = propertyData.dataElements.length;
             
                 navigationTree.classList.remove('hidden');
+                
+                console.log('[DISPLAY] Navigation tree rendered successfully');
             }
 
 
             async function loadLaunchPropertyData(credentials, propertyId) {
+                console.log('[API] Starting Adobe Launch data load');
+                console.log('[API] Credentials:', {
+                    orgId: credentials.orgId,
+                    clientId: credentials.clientId,
+                    techAccountId: credentials.techAccountId,
+                    privateKeyPath: credentials.privateKeyPath,
+                    hasClientSecret: !!credentials.clientSecret
+                });
+                console.log('[API] Property ID:', propertyId);
+                
                 addStatus('Initializing Adobe Launch API connection...', 'info');
                 updateProgress(10);
                 await new Promise(resolve => setTimeout(resolve, 1000));
 
+                console.log('[API] Simulating authentication...');
                 addStatus('Authenticating with Adobe Launch...', 'info');
                 updateProgress(20);
                 await new Promise(resolve => setTimeout(resolve, 1000));
 
+                console.log('[API] Authentication successful (simulated)');
                 addStatus(`Connected to Property: ${propertyId}`, 'success');
                 updateProgress(30);
                 await new Promise(resolve => setTimeout(resolve, 500));
 
+                console.log('[API] Fetching rules...');
                 addStatus('Fetching rules from property...', 'info');
                 updateProgress(40);
             
                 const rulesPrompt = `Generate a realistic dataset of 15-20 Adobe Launch rules for a typical e-commerce website. Include various rule types like page load, click events, form submissions, and custom events. Return as JSON array with fields: rule_name, rule_id, enabled, rule_order, event_type, conditions, actions, last_modified.`;
             
+                console.log('[LLM] Calling AI to generate rules data...');
+                console.log('[LLM] Rules prompt:', rulesPrompt);
+                
                 let rulesData;
                 try {
                     rulesData = await window.call_llm(
@@ -470,23 +507,36 @@
                         }]
                     );
                 
+                    console.log('[LLM] Rules response received:', rulesData);
+                    console.log('[LLM] Rules data type:', typeof rulesData);
+                    console.log('[LLM] Rules array length:', rulesData.rules ? rulesData.rules.length : 'N/A');
+                    
                     if (!rulesData.rules || !Array.isArray(rulesData.rules)) {
+                        console.error('[LLM] Invalid rules data format:', rulesData);
                         throw new Error('Invalid rules data format');
                     }
+                    
+                    console.log('[LLM] Sample rule:', rulesData.rules[0]);
                 } catch (error) {
+                    console.error('[LLM] Error fetching rules:', error);
                     addStatus('Error fetching rules: ' + error.message, 'error');
                     throw error;
                 }
 
+                console.log(`[API] Successfully loaded ${rulesData.rules.length} rules`);
                 addStatus(`Found ${rulesData.rules.length} rules`, 'success');
                 updateProgress(60);
                 await new Promise(resolve => setTimeout(resolve, 500));
 
+                console.log('[API] Fetching data elements...');
                 addStatus('Fetching data elements from property...', 'info');
                 updateProgress(70);
 
                 const dataElementsPrompt = `Generate a realistic dataset of 15-20 Adobe Launch data elements for a typical e-commerce website. Include various types like JavaScript variables, cookie values, custom code, and CSS selectors. For data elements of type "Custom Code" or "JavaScript Variable", include a source_code field with realistic JavaScript code. Return as JSON array with fields: element_name, element_id, element_type, default_value, storage_duration, clean_text, enabled, last_modified, source_code (optional, only for Custom Code or JavaScript Variable types).`;
             
+                console.log('[LLM] Calling AI to generate data elements...');
+                console.log('[LLM] Data elements prompt:', dataElementsPrompt);
+                
                 let dataElementsData;
                 try {
                     dataElementsData = await window.call_llm(
@@ -497,14 +547,23 @@
                         }]
                     );
                 
+                    console.log('[LLM] Data elements response received:', dataElementsData);
+                    console.log('[LLM] Data elements type:', typeof dataElementsData);
+                    console.log('[LLM] Data elements array length:', dataElementsData.data_elements ? dataElementsData.data_elements.length : 'N/A');
+                    
                     if (!dataElementsData.data_elements || !Array.isArray(dataElementsData.data_elements)) {
+                        console.error('[LLM] Invalid data elements format:', dataElementsData);
                         throw new Error('Invalid data elements format');
                     }
+                    
+                    console.log('[LLM] Sample data element:', dataElementsData.data_elements[0]);
                 } catch (error) {
+                    console.error('[LLM] Error fetching data elements:', error);
                     addStatus('Error fetching data elements: ' + error.message, 'error');
                     throw error;
                 }
 
+                console.log(`[API] Successfully loaded ${dataElementsData.data_elements.length} data elements`);
                 addStatus(`Found ${dataElementsData.data_elements.length} data elements`, 'success');
                 updateProgress(90);
                 await new Promise(resolve => setTimeout(resolve, 500));
@@ -512,14 +571,22 @@
                 propertyData.rules = rulesData.rules;
                 propertyData.dataElements = dataElementsData.data_elements;
             
+                console.log('[API] Final property data:', propertyData);
+                console.log('[API] ⚠️ WARNING: This app is currently generating DUMMY DATA using AI');
+                console.log('[API] ⚠️ To load real data, you need to implement actual Adobe Launch API calls');
+                console.log('[API] ⚠️ The launchpy library would need to be integrated on the backend');
+                
                 updateProgress(100);
                 addStatus('All data successfully loaded!', 'success');
+                addStatus('⚠️ Note: Currently displaying AI-generated dummy data', 'warning');
             
                 return propertyData;
             }
         
 
             document.getElementById('loadBtn').addEventListener('click', async function() {
+                console.log('[BUTTON] Load button clicked');
+                
                 const orgId = document.getElementById('orgId').value.trim();
                 const clientId = document.getElementById('clientId').value.trim();
                 const clientSecret = document.getElementById('clientSecret').value.trim();
@@ -527,7 +594,17 @@
                 const privateKeyPath = document.getElementById('privateKeyPath').value.trim();
                 const propertyId = document.getElementById('propertyId').value.trim();
 
+                console.log('[BUTTON] Form values:', {
+                    hasOrgId: !!orgId,
+                    hasClientId: !!clientId,
+                    hasClientSecret: !!clientSecret,
+                    hasTechAccountId: !!techAccountId,
+                    hasPrivateKeyPath: !!privateKeyPath,
+                    hasPropertyId: !!propertyId
+                });
+
                 if (!orgId || !clientId || !clientSecret || !techAccountId || !privateKeyPath || !propertyId) {
+                    console.warn('[BUTTON] Missing required fields');
                     alert('Please fill in all credential fields and property ID');
                     return;
                 }
@@ -557,9 +634,12 @@
                 this.disabled = true;
                 this.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> Loading...';
 
+                console.log('[BUTTON] Starting data load process...');
+
                 try {
                     const result = await loadLaunchPropertyData(credentials, propertyId);
                 
+                    console.log('[BUTTON] Data load successful, displaying tree');
                     displayNavigationTree();
                 
                     this.innerHTML = '<i class="fas fa-check text-xl"></i> Data Loaded';
@@ -567,6 +647,7 @@
                     this.classList.add('from-green-600', 'to-green-700');
                 
                 } catch (error) {
+                    console.error('[BUTTON] Data load failed:', error);
                     errorMessage.classList.remove('hidden');
                     document.getElementById('errorText').textContent = error.message;
                     this.innerHTML = '<i class="fas fa-sync-alt text-xl"></i> Load Property Data';
@@ -582,8 +663,12 @@
             document.getElementById('propertyId').addEventListener('input', saveToLocalStorage);
 
             window.addEventListener('load', function() {
+                console.log('[INIT] Adobe Launch Property Inspector initializing...');
                 loadFromLocalStorage();
-                console.log('Adobe Launch Property Inspector loaded successfully');
+                console.log('[INIT] Adobe Launch Property Inspector loaded successfully');
+                console.log('[INIT] ⚠️ IMPORTANT: This app currently generates DUMMY DATA using AI');
+                console.log('[INIT] ⚠️ To connect to real Adobe Launch data, backend integration with launchpy is required');
+                console.log('[INIT] ⚠️ Check console logs prefixed with [API], [LLM], and [STORAGE] for debugging');
             });
         
         </script>
