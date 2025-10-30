@@ -10,11 +10,11 @@
 <meta content="website" property="og:type"/>
 <link href="assets/img_32x32_bd90b16b.png" rel="icon" type="image/png"/>
 <title>Adobe Launch Property Downloader</title>
-<script src="assets/script_7d2d00aa.js"></script>
-<link href="assets/style_a422b0fc.css" rel="stylesheet"/>
-<script crossorigin="" src="assets/script_017ada50.js"></script>
-<link href="assets/style_e01877c0.css" rel="stylesheet"/>
-<script src="assets/script_e3f56480.js"></script>
+<script src="assets/script_f7537b60.js"></script>
+<link href="assets/style_d78ba436.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_08d07333.js"></script>
+<link href="assets/style_91c4efb3.css" rel="stylesheet"/>
+<script src="assets/script_3506de17.js"></script>
 <style>
         @font-face {
             font-family: 'Font Awesome 6 Free';
@@ -208,6 +208,21 @@
             progressPercent.textContent = percent + '%';
         }
 
+        function downloadCSV(filename, data) {
+            const csv = Papa.unparse(data);
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
         async function simulateLaunchPyDownload(credentials, propertyId) {
             addStatus('Initializing Adobe Launch API connection...', 'info');
             updateProgress(10);
@@ -277,10 +292,12 @@
 
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
             
-            addStatus('Saving rules to CSV...', 'info');
+            addStatus('Downloading rules CSV file...', 'info');
+            downloadCSV(`adobe_launch_rules_${timestamp}.csv`, rulesData.rules);
             window.save_data_to_csv(`adobe_launch_rules_${timestamp}.csv`, rulesData.rules);
             
-            addStatus('Saving data elements to CSV...', 'info');
+            addStatus('Downloading data elements CSV file...', 'info');
+            downloadCSV(`adobe_launch_data_elements_${timestamp}.csv`, dataElementsData.data_elements);
             window.save_data_to_csv(`adobe_launch_data_elements_${timestamp}.csv`, dataElementsData.data_elements);
             
             updateProgress(100);
