@@ -10,11 +10,11 @@
 <meta content="website" property="og:type"/>
 <link href="assets/img_32x32_bd90b16b.png" rel="icon" type="image/png"/>
 <title>Adobe Launch Property Downloader</title>
-<script src="assets/script_0ee08cc1.js"></script>
-<link href="assets/style_8fcac120.css" rel="stylesheet"/>
-<script crossorigin="" src="assets/script_10aef1c1.js"></script>
-<link href="assets/style_d4905e24.css" rel="stylesheet"/>
-<script src="assets/script_f901fae5.js"></script>
+<script src="assets/script_919334c8.js"></script>
+<link href="assets/style_58b444a4.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_ae46d5ff.js"></script>
+<link href="assets/style_c0f91521.css" rel="stylesheet"/>
+<script src="assets/script_40a8d81c.js"></script>
 <style>
             @font-face {
                 font-family: 'Font Awesome 6 Free';
@@ -412,6 +412,7 @@
                 navigationTree.classList.remove('hidden');
             }
 
+
             async function loadLaunchPropertyData(credentials, propertyId) {
                 addStatus('Initializing Adobe Launch API connection...', 'info');
                 updateProgress(10);
@@ -443,6 +444,17 @@
                     if (!rulesData.rules || !Array.isArray(rulesData.rules)) {
                         throw new Error('Invalid rules data format');
                     }
+                } catch (error) {
+                    addStatus('Error fetching rules: ' + error.message, 'error');
+                    throw error;
+                }
+
+                addStatus(`Found ${rulesData.rules.length} rules`, 'success');
+                updateProgress(60);
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                addStatus('Fetching data elements from property...', 'info');
+                updateProgress(70);
 
                 const dataElementsPrompt = `Generate a realistic dataset of 15-20 Adobe Launch data elements for a typical e-commerce website. Include various types like JavaScript variables, cookie values, custom code, and CSS selectors. For data elements of type "Custom Code" or "JavaScript Variable", include a source_code field with realistic JavaScript code. Return as JSON array with fields: element_name, element_id, element_type, default_value, storage_duration, clean_text, enabled, last_modified, source_code (optional, only for Custom Code or JavaScript Variable types).`;
             
@@ -453,19 +465,6 @@
                         [{"role": "user", "content": dataElementsPrompt}],
                         [{
                             'data_elements': 'array of data element objects with fields: element_name (string), element_id (string), element_type (string), default_value (string), storage_duration (string), clean_text (boolean), enabled (boolean), last_modified (string), source_code (string, optional - only include for Custom Code or JavaScript Variable types with realistic JavaScript code)'
-                        }]
-                    );
-        
-            
-                const dataElementsPrompt = `Generate a realistic dataset of 15-20 Adobe Launch data elements for a typical e-commerce website. Include various types like JavaScript variables, cookie values, custom code, and CSS selectors. Return as JSON array with fields: element_name, element_id, element_type, default_value, storage_duration, clean_text, enabled, last_modified.`;
-            
-                let dataElementsData;
-                try {
-                    dataElementsData = await window.call_llm(
-                        'You are a data generator for Adobe Launch data elements. Generate realistic data element data in the exact JSON format requested. Return ONLY valid JSON array, no additional text.',
-                        [{"role": "user", "content": dataElementsPrompt}],
-                        [{
-                            'data_elements': 'array of data element objects with fields: element_name (string), element_id (string), element_type (string), default_value (string), storage_duration (string), clean_text (boolean), enabled (boolean), last_modified (string)'
                         }]
                     );
                 
@@ -489,6 +488,7 @@
             
                 return propertyData;
             }
+        
 
             document.getElementById('loadBtn').addEventListener('click', async function() {
                 const orgId = document.getElementById('orgId').value.trim();
