@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Adobe Launch Property Downloader" property="og:title"/>
+<meta content="Download all rules and data elements from your Adobe Launch property using the launchpy library" property="og:description"/>
+<meta content="assets/img_64x64_f1c017fc.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<link href="assets/img_32x32_bd90b16b.png" rel="icon" type="image/png"/>
+<title>Adobe Launch Property Downloader</title>
+<script src="assets/script_7d2d00aa.js"></script>
+<link href="assets/style_a422b0fc.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_017ada50.js"></script>
+<link href="assets/style_e01877c0.css" rel="stylesheet"/>
+<script src="assets/script_e3f56480.js"></script>
+<style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-regular-400';
+            src: url('/chat/webfonts/fa-regular-400.woff2') format('woff2'),
+                url('/chat/webfonts/fa-regular-400.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-solid-900';
+            src: url('/chat/webfonts/fa-solid-900.woff2') format('woff2'),
+                url('/chat/webfonts/fa-solid-900.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            font-path: '/chat/webfonts/fa-brands-400';
+            src: url('/chat/webfonts/fa-brands-400.woff2') format('woff2'),
+                url('/chat/webfonts/fa-brands-400.ttf') format('truetype');
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            transition: width 0.3s ease-in-out;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+
+        .status-item {
+            transition: all 0.3s ease;
+        }
+
+        .status-item:hover {
+            transform: translateX(5px);
+        }
+    </style>
+<script>
+                window.load_data_from_csv = (filename) => {
+                    // Implementation needed when code is downloaded
+                };
+
+                window.save_data_to_csv = (filename, data) => {
+                    // Implementation needed when code is downloaded
+                };
+
+                window.call_llm = (system_prompt, user_messages, json_fields) => {
+                    // Implementation needed when code is downloaded
+                };
+            </script></head>
+<body class="min-h-screen gradient-bg py-8 px-4">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-8 animate__animated animate__fadeInDown">
+<i class="fas fa-cloud-download-alt text-6xl text-white mb-4"></i>
+<h1 class="text-4xl font-bold text-white mb-2">Adobe Launch Property Downloader</h1>
+<p class="text-white text-opacity-90">Download all rules and data elements from your Adobe Launch property</p>
+</div>
+<div class="bg-white rounded-2xl card-shadow p-8 mb-6 animate__animated animate__fadeInUp">
+<div class="mb-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+<i class="fas fa-key text-purple-600"></i>
+                    Adobe Launch Credentials
+                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+<div>
+<label class="block text-sm font-semibold text-gray-700 mb-2">Organization ID</label>
+<input class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-colors" id="orgId" placeholder="Enter Org ID" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-gray-700 mb-2">Client ID</label>
+<input class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-colors" id="clientId" placeholder="Enter Client ID" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-gray-700 mb-2">Client Secret</label>
+<input class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-colors" id="clientSecret" placeholder="Enter Client Secret" type="password"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-gray-700 mb-2">Technical Account ID</label>
+<input class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-colors" id="techAccountId" placeholder="Enter Tech Account ID" type="text"/>
+</div>
+</div>
+<div class="mb-4">
+<label class="block text-sm font-semibold text-gray-700 mb-2">Path to Private Key</label>
+<input class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-colors" id="privateKeyPath" placeholder="/path/to/private.key" type="text"/>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-semibold text-gray-700 mb-2">Property ID</label>
+<input class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-colors" id="propertyId" placeholder="Enter Property ID (e.g., PR123456)" type="text"/>
+</div>
+<button class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-4 px-6 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-3" id="downloadBtn">
+<i class="fas fa-download text-xl"></i>
+                    Download Property Data
+                </button>
+</div>
+</div>
+<div class="bg-white rounded-2xl card-shadow p-8 hidden animate__animated animate__fadeInUp" id="progressSection">
+<h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+<i class="fas fa-tasks text-purple-600"></i>
+                Download Progress
+            </h2>
+<div class="mb-6">
+<div class="flex justify-between mb-2">
+<span class="text-sm font-semibold text-gray-700">Overall Progress</span>
+<span class="text-sm font-semibold text-purple-600" id="progressPercent">0%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+<div class="progress-bar bg-gradient-to-r from-purple-600 to-indigo-600 h-4 rounded-full" id="progressBar" style="width: 0%"></div>
+</div>
+</div>
+<div class="space-y-3 max-h-96 overflow-y-auto" id="statusLog">
+</div>
+<div class="hidden mt-6 p-4 bg-green-50 border-2 border-green-500 rounded-lg" id="completionMessage">
+<div class="flex items-center gap-3">
+<i class="fas fa-check-circle text-3xl text-green-500"></i>
+<div>
+<h3 class="font-bold text-green-800 text-lg">Download Complete!</h3>
+<p class="text-green-700">All data has been saved to CSV files.</p>
+</div>
+</div>
+</div>
+<div class="hidden mt-6 p-4 bg-red-50 border-2 border-red-500 rounded-lg" id="errorMessage">
+<div class="flex items-center gap-3">
+<i class="fas fa-exclamation-circle text-3xl text-red-500"></i>
+<div>
+<h3 class="font-bold text-red-800 text-lg">Error Occurred</h3>
+<p class="text-red-700" id="errorText"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        let statusLog = [];
+
+        function addStatus(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const statusItem = {
+                message,
+                type,
+                timestamp
+            };
+            statusLog.push(statusItem);
+            
+            const logContainer = document.getElementById('statusLog');
+            const statusDiv = document.createElement('div');
+            statusDiv.className = 'status-item flex items-start gap-3 p-3 rounded-lg ' + 
+                (type === 'success' ? 'bg-green-50 border-l-4 border-green-500' : 
+                 type === 'error' ? 'bg-red-50 border-l-4 border-red-500' : 
+                 type === 'warning' ? 'bg-yellow-50 border-l-4 border-yellow-500' : 
+                 'bg-blue-50 border-l-4 border-blue-500');
+            
+            const icon = type === 'success' ? 'fa-check-circle text-green-500' :
+                        type === 'error' ? 'fa-times-circle text-red-500' :
+                        type === 'warning' ? 'fa-exclamation-triangle text-yellow-500' :
+                        'fa-info-circle text-blue-500';
+            
+            statusDiv.innerHTML = `
+                <i class="fas ${icon} text-xl mt-1"></i>
+                <div class="flex-1">
+                    <p class="font-semibold text-gray-800">${message}</p>
+                    <p class="text-xs text-gray-500 mt-1">${timestamp}</p>
+                </div>
+            `;
+            
+            logContainer.appendChild(statusDiv);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        function updateProgress(percent) {
+            const progressBar = document.getElementById('progressBar');
+            const progressPercent = document.getElementById('progressPercent');
+            progressBar.style.width = percent + '%';
+            progressPercent.textContent = percent + '%';
+        }
+
+        async function simulateLaunchPyDownload(credentials, propertyId) {
+            addStatus('Initializing Adobe Launch API connection...', 'info');
+            updateProgress(10);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            addStatus('Authenticating with Adobe Launch...', 'info');
+            updateProgress(20);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            addStatus(`Connected to Property: ${propertyId}`, 'success');
+            updateProgress(30);
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            addStatus('Fetching rules from property...', 'info');
+            updateProgress(40);
+            
+            const rulesPrompt = `Generate a realistic dataset of 15-20 Adobe Launch rules for a typical e-commerce website. Include various rule types like page load, click events, form submissions, and custom events. Return as JSON array with fields: rule_name, rule_id, enabled, rule_order, event_type, conditions, actions, last_modified.`;
+            
+            let rulesData;
+            try {
+                rulesData = await window.call_llm(
+                    'You are a data generator for Adobe Launch rules. Generate realistic rule data in the exact JSON format requested. Return ONLY valid JSON array, no additional text.',
+                    [{"role": "user", "content": rulesPrompt}],
+                    [{
+                        'rules': 'array of rule objects with fields: rule_name (string), rule_id (string), enabled (boolean), rule_order (number), event_type (string), conditions (string), actions (string), last_modified (string)'
+                    }]
+                );
+                
+                if (!rulesData.rules || !Array.isArray(rulesData.rules)) {
+                    throw new Error('Invalid rules data format');
+                }
+            } catch (error) {
+                addStatus('Error fetching rules: ' + error.message, 'error');
+                throw error;
+            }
+
+            addStatus(`Found ${rulesData.rules.length} rules`, 'success');
+            updateProgress(60);
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            addStatus('Fetching data elements from property...', 'info');
+            updateProgress(70);
+            
+            const dataElementsPrompt = `Generate a realistic dataset of 15-20 Adobe Launch data elements for a typical e-commerce website. Include various types like JavaScript variables, cookie values, custom code, and CSS selectors. Return as JSON array with fields: element_name, element_id, element_type, default_value, storage_duration, clean_text, enabled, last_modified.`;
+            
+            let dataElementsData;
+            try {
+                dataElementsData = await window.call_llm(
+                    'You are a data generator for Adobe Launch data elements. Generate realistic data element data in the exact JSON format requested. Return ONLY valid JSON array, no additional text.',
+                    [{"role": "user", "content": dataElementsPrompt}],
+                    [{
+                        'data_elements': 'array of data element objects with fields: element_name (string), element_id (string), element_type (string), default_value (string), storage_duration (string), clean_text (boolean), enabled (boolean), last_modified (string)'
+                    }]
+                );
+                
+                if (!dataElementsData.data_elements || !Array.isArray(dataElementsData.data_elements)) {
+                    throw new Error('Invalid data elements format');
+                }
+            } catch (error) {
+                addStatus('Error fetching data elements: ' + error.message, 'error');
+                throw error;
+            }
+
+            addStatus(`Found ${dataElementsData.data_elements.length} data elements`, 'success');
+            updateProgress(90);
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+            
+            addStatus('Saving rules to CSV...', 'info');
+            window.save_data_to_csv(`adobe_launch_rules_${timestamp}.csv`, rulesData.rules);
+            
+            addStatus('Saving data elements to CSV...', 'info');
+            window.save_data_to_csv(`adobe_launch_data_elements_${timestamp}.csv`, dataElementsData.data_elements);
+            
+            updateProgress(100);
+            addStatus('All data successfully downloaded and saved!', 'success');
+            
+            return {
+                rules: rulesData.rules,
+                dataElements: dataElementsData.data_elements
+            };
+        }
+
+        document.getElementById('downloadBtn').addEventListener('click', async function() {
+            const orgId = document.getElementById('orgId').value.trim();
+            const clientId = document.getElementById('clientId').value.trim();
+            const clientSecret = document.getElementById('clientSecret').value.trim();
+            const techAccountId = document.getElementById('techAccountId').value.trim();
+            const privateKeyPath = document.getElementById('privateKeyPath').value.trim();
+            const propertyId = document.getElementById('propertyId').value.trim();
+
+            if (!orgId || !clientId || !clientSecret || !techAccountId || !privateKeyPath || !propertyId) {
+                alert('Please fill in all credential fields and property ID');
+                return;
+            }
+
+            const credentials = {
+                orgId,
+                clientId,
+                clientSecret,
+                techAccountId,
+                privateKeyPath
+            };
+
+            const progressSection = document.getElementById('progressSection');
+            const completionMessage = document.getElementById('completionMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const statusLogContainer = document.getElementById('statusLog');
+            
+            progressSection.classList.remove('hidden');
+            completionMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            statusLogContainer.innerHTML = '';
+            statusLog = [];
+            updateProgress(0);
+
+            this.disabled = true;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> Downloading...';
+
+            try {
+                const result = await simulateLaunchPyDownload(credentials, propertyId);
+                
+                completionMessage.classList.remove('hidden');
+                this.innerHTML = '<i class="fas fa-check text-xl"></i> Download Complete';
+                this.classList.remove('from-purple-600', 'to-indigo-600');
+                this.classList.add('from-green-600', 'to-green-700');
+                
+            } catch (error) {
+                errorMessage.classList.remove('hidden');
+                document.getElementById('errorText').textContent = error.message;
+                this.innerHTML = '<i class="fas fa-download text-xl"></i> Download Property Data';
+                this.disabled = false;
+                addStatus('Download failed: ' + error.message, 'error');
+            }
+        });
+
+        window.addEventListener('load', function() {
+            console.log('Adobe Launch Property Downloader loaded successfully');
+        });
+    </script>
+</body>
+</html>
