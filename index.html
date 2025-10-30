@@ -10,11 +10,11 @@
 <meta content="website" property="og:type"/>
 <link href="assets/img_32x32_bd90b16b.png" rel="icon" type="image/png"/>
 <title>Adobe Launch Property Downloader</title>
-<script src="assets/script_e4353d80.js"></script>
-<link href="assets/style_6d4dcb21.css" rel="stylesheet"/>
-<script crossorigin="" src="assets/script_c95bb919.js"></script>
-<link href="assets/style_5ee0f9aa.css" rel="stylesheet"/>
-<script src="assets/script_96ccb996.js"></script>
+<script src="assets/script_dfa0cf5f.js"></script>
+<link href="assets/style_463bd872.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_4fe1ad76.js"></script>
+<link href="assets/style_568c9d4d.css" rel="stylesheet"/>
+<script src="assets/script_6d7dc076.js"></script>
 <style>
             @font-face {
                 font-family: 'Font Awesome 6 Free';
@@ -452,6 +452,321 @@
                 dataElements: []
             };
 
+            const SAMPLE_RULES = [
+                {
+                    rule_name: "Page Load - Homepage",
+                    rule_id: "RL001",
+                    enabled: true,
+                    rule_order: 1,
+                    event_type: "Page Load",
+                    conditions: "URL contains '/home' OR URL equals '/'",
+                    actions: "Set Analytics Page Name, Fire Page View Beacon",
+                    last_modified: "2024-01-15T10:30:00Z"
+                },
+                {
+                    rule_name: "Click - Add to Cart",
+                    rule_id: "RL002",
+                    enabled: true,
+                    rule_order: 2,
+                    event_type: "Click",
+                    conditions: "Element matches CSS selector '.add-to-cart-btn'",
+                    actions: "Track Cart Addition Event, Update Cart Data Layer",
+                    last_modified: "2024-01-14T14:22:00Z"
+                },
+                {
+                    rule_name: "Form Submit - Newsletter Signup",
+                    rule_id: "RL003",
+                    enabled: true,
+                    rule_order: 3,
+                    event_type: "Form Submission",
+                    conditions: "Form ID equals 'newsletter-form'",
+                    actions: "Track Form Submission, Set User Preference Cookie",
+                    last_modified: "2024-01-13T09:15:00Z"
+                },
+                {
+                    rule_name: "Page Load - Product Detail",
+                    rule_id: "RL004",
+                    enabled: true,
+                    rule_order: 4,
+                    event_type: "Page Load",
+                    conditions: "URL contains '/product/'",
+                    actions: "Set Product Variables, Fire Product View Event",
+                    last_modified: "2024-01-12T16:45:00Z"
+                },
+                {
+                    rule_name: "Click - Checkout Button",
+                    rule_id: "RL005",
+                    enabled: true,
+                    rule_order: 5,
+                    event_type: "Click",
+                    conditions: "Element matches CSS selector '#checkout-btn'",
+                    actions: "Track Checkout Initiation, Set Checkout Step",
+                    last_modified: "2024-01-11T11:30:00Z"
+                },
+                {
+                    rule_name: "Custom Event - Video Play",
+                    rule_id: "RL006",
+                    enabled: true,
+                    rule_order: 6,
+                    event_type: "Custom Event",
+                    conditions: "Event name equals 'videoPlay'",
+                    actions: "Track Video Engagement, Update Media Analytics",
+                    last_modified: "2024-01-10T13:20:00Z"
+                },
+                {
+                    rule_name: "Page Load - Search Results",
+                    rule_id: "RL007",
+                    enabled: true,
+                    rule_order: 7,
+                    event_type: "Page Load",
+                    conditions: "URL contains '/search'",
+                    actions: "Track Search Query, Set Search Results Count",
+                    last_modified: "2024-01-09T08:55:00Z"
+                },
+                {
+                    rule_name: "Click - Social Share",
+                    rule_id: "RL008",
+                    enabled: false,
+                    rule_order: 8,
+                    event_type: "Click",
+                    conditions: "Element class contains 'social-share'",
+                    actions: "Track Social Share Event, Set Share Platform",
+                    last_modified: "2024-01-08T15:10:00Z"
+                },
+                {
+                    rule_name: "Page Load - Category Page",
+                    rule_id: "RL009",
+                    enabled: true,
+                    rule_order: 9,
+                    event_type: "Page Load",
+                    conditions: "URL contains '/category/'",
+                    actions: "Set Category Variables, Fire Category View",
+                    last_modified: "2024-01-07T10:25:00Z"
+                },
+                {
+                    rule_name: "Form Submit - Contact Form",
+                    rule_id: "RL010",
+                    enabled: true,
+                    rule_order: 10,
+                    event_type: "Form Submission",
+                    conditions: "Form ID equals 'contact-form'",
+                    actions: "Track Contact Submission, Set Lead Source",
+                    last_modified: "2024-01-06T14:40:00Z"
+                },
+                {
+                    rule_name: "Click - Remove from Cart",
+                    rule_id: "RL011",
+                    enabled: true,
+                    rule_order: 11,
+                    event_type: "Click",
+                    conditions: "Element matches CSS selector '.remove-item'",
+                    actions: "Track Cart Removal, Update Cart Total",
+                    last_modified: "2024-01-05T09:30:00Z"
+                },
+                {
+                    rule_name: "Page Load - Order Confirmation",
+                    rule_id: "RL012",
+                    enabled: true,
+                    rule_order: 12,
+                    event_type: "Page Load",
+                    conditions: "URL contains '/order-confirmation'",
+                    actions: "Track Purchase Event, Clear Cart Data",
+                    last_modified: "2024-01-04T16:15:00Z"
+                },
+                {
+                    rule_name: "Custom Event - Scroll Depth",
+                    rule_id: "RL013",
+                    enabled: true,
+                    rule_order: 13,
+                    event_type: "Custom Event",
+                    conditions: "Event name equals 'scrollDepth'",
+                    actions: "Track Scroll Milestone, Set Engagement Score",
+                    last_modified: "2024-01-03T11:50:00Z"
+                },
+                {
+                    rule_name: "Click - Filter Products",
+                    rule_id: "RL014",
+                    enabled: true,
+                    rule_order: 14,
+                    event_type: "Click",
+                    conditions: "Element class contains 'filter-option'",
+                    actions: "Track Filter Selection, Update Product List",
+                    last_modified: "2024-01-02T13:35:00Z"
+                },
+                {
+                    rule_name: "Page Load - User Account",
+                    rule_id: "RL015",
+                    enabled: true,
+                    rule_order: 15,
+                    event_type: "Page Load",
+                    conditions: "URL contains '/account'",
+                    actions: "Set User ID, Track Account Page View",
+                    last_modified: "2024-01-01T10:20:00Z"
+                }
+            ];
+
+            const SAMPLE_DATA_ELEMENTS = [
+                {
+                    element_name: "Page Name",
+                    element_id: "DE001",
+                    element_type: "JavaScript Variable",
+                    default_value: "document.title",
+                    storage_duration: "Page View",
+                    clean_text: true,
+                    enabled: true,
+                    last_modified: "2024-01-15T10:30:00Z",
+                    source_code: "return document.title || 'Untitled Page';"
+                },
+                {
+                    element_name: "User ID",
+                    element_id: "DE002",
+                    element_type: "Cookie",
+                    default_value: "",
+                    storage_duration: "Session",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-14T14:22:00Z"
+                },
+                {
+                    element_name: "Cart Total",
+                    element_id: "DE003",
+                    element_type: "Custom Code",
+                    default_value: "0",
+                    storage_duration: "Page View",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-13T09:15:00Z",
+                    source_code: "var cart = window.dataLayer.find(function(item) { return item.event === 'cart'; });\nreturn cart ? cart.total : 0;"
+                },
+                {
+                    element_name: "Product SKU",
+                    element_id: "DE004",
+                    element_type: "CSS Selector",
+                    default_value: "",
+                    storage_duration: "Page View",
+                    clean_text: true,
+                    enabled: true,
+                    last_modified: "2024-01-12T16:45:00Z"
+                },
+                {
+                    element_name: "Current URL",
+                    element_id: "DE005",
+                    element_type: "JavaScript Variable",
+                    default_value: "window.location.href",
+                    storage_duration: "Page View",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-11T11:30:00Z",
+                    source_code: "return window.location.href;"
+                },
+                {
+                    element_name: "Session ID",
+                    element_id: "DE006",
+                    element_type: "Cookie",
+                    default_value: "",
+                    storage_duration: "Session",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-10T13:20:00Z"
+                },
+                {
+                    element_name: "Search Query",
+                    element_id: "DE007",
+                    element_type: "Query String Parameter",
+                    default_value: "",
+                    storage_duration: "Page View",
+                    clean_text: true,
+                    enabled: true,
+                    last_modified: "2024-01-09T08:55:00Z"
+                },
+                {
+                    element_name: "User Email",
+                    element_id: "DE008",
+                    element_type: "Custom Code",
+                    default_value: "",
+                    storage_duration: "Visitor",
+                    clean_text: true,
+                    enabled: true,
+                    last_modified: "2024-01-08T15:10:00Z",
+                    source_code: "var user = window.currentUser || {};\nreturn user.email || '';"
+                },
+                {
+                    element_name: "Category Name",
+                    element_id: "DE009",
+                    element_type: "JavaScript Variable",
+                    default_value: "",
+                    storage_duration: "Page View",
+                    clean_text: true,
+                    enabled: true,
+                    last_modified: "2024-01-07T10:25:00Z",
+                    source_code: "return window.categoryName || '';"
+                },
+                {
+                    element_name: "Device Type",
+                    element_id: "DE010",
+                    element_type: "Custom Code",
+                    default_value: "desktop",
+                    storage_duration: "Session",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-06T14:40:00Z",
+                    source_code: "var width = window.innerWidth;\nif (width < 768) return 'mobile';\nif (width < 1024) return 'tablet';\nreturn 'desktop';"
+                },
+                {
+                    element_name: "Cart Item Count",
+                    element_id: "DE011",
+                    element_type: "JavaScript Variable",
+                    default_value: "0",
+                    storage_duration: "Page View",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-05T09:30:00Z",
+                    source_code: "return window.cart ? window.cart.items.length : 0;"
+                },
+                {
+                    element_name: "Order ID",
+                    element_id: "DE012",
+                    element_type: "Data Layer",
+                    default_value: "",
+                    storage_duration: "Page View",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-04T16:15:00Z"
+                },
+                {
+                    element_name: "Page Type",
+                    element_id: "DE013",
+                    element_type: "Custom Code",
+                    default_value: "other",
+                    storage_duration: "Page View",
+                    clean_text: true,
+                    enabled: true,
+                    last_modified: "2024-01-03T11:50:00Z",
+                    source_code: "var path = window.location.pathname;\nif (path === '/') return 'home';\nif (path.includes('/product/')) return 'product';\nif (path.includes('/category/')) return 'category';\nreturn 'other';"
+                },
+                {
+                    element_name: "Logged In Status",
+                    element_id: "DE014",
+                    element_type: "JavaScript Variable",
+                    default_value: "false",
+                    storage_duration: "Session",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-02T13:35:00Z",
+                    source_code: "return window.isLoggedIn ? 'true' : 'false';"
+                },
+                {
+                    element_name: "Referrer URL",
+                    element_id: "DE015",
+                    element_type: "JavaScript Variable",
+                    default_value: "",
+                    storage_duration: "Session",
+                    clean_text: false,
+                    enabled: true,
+                    last_modified: "2024-01-01T10:20:00Z",
+                    source_code: "return document.referrer;"
+                }
+            ];
 
             function saveToLocalStorage() {
                 const orgId = document.getElementById('orgId').value.trim();
@@ -536,7 +851,6 @@
                 console.log(`[PROGRESS] ${percent}%`);
             }
 
-
             function createRuleTreeItem(rule, index) {
                 const itemId = `rule-${index}`;
                 const enabledBadge = rule.enabled ? 
@@ -604,9 +918,6 @@
                     </div>
                 `;
             }
-        
-
-
 
             function createDataElementTreeItem(element, index) {
                 const itemId = `element-${index}`;
@@ -667,8 +978,6 @@
                     </div>
                 `;
             }
-        
-        
 
             function toggleTreeItem(itemId) {
                 const content = document.getElementById(`${itemId}-content`);
@@ -704,127 +1013,60 @@
                 console.log('[DISPLAY] Navigation tree rendered successfully');
             }
 
-
             async function loadLaunchPropertyData(credentials, propertyId) {
                 console.log('[API] Starting Adobe Launch data load');
-                console.log('[API] Credentials:', {
-                    orgId: credentials.orgId,
-                    clientId: credentials.clientId,
-                    techAccountId: credentials.techAccountId,
-                    privateKeyPath: credentials.privateKeyPath,
-                    hasClientSecret: !!credentials.clientSecret
-                });
+                console.log('[API] Using sample data from localStorage');
                 console.log('[API] Property ID:', propertyId);
                 
                 addStatus('Initializing Adobe Launch API connection...', 'info');
                 updateProgress(10);
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                await new Promise(resolve => setTimeout(resolve, 500));
 
                 console.log('[API] Simulating authentication...');
                 addStatus('Authenticating with Adobe Launch...', 'info');
                 updateProgress(20);
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                await new Promise(resolve => setTimeout(resolve, 500));
 
                 console.log('[API] Authentication successful (simulated)');
                 addStatus(`Connected to Property: ${propertyId}`, 'success');
                 updateProgress(30);
+                await new Promise(resolve => setTimeout(resolve, 300));
+
+                console.log('[API] Loading rules from sample data...');
+                addStatus('Fetching rules from property...', 'info');
+                updateProgress(50);
                 await new Promise(resolve => setTimeout(resolve, 500));
 
-                console.log('[API] Fetching rules...');
-                addStatus('Fetching rules from property...', 'info');
-                updateProgress(40);
-            
-                const rulesPrompt = `Generate a realistic dataset of 15-20 Adobe Launch rules for a typical e-commerce website. Include various rule types like page load, click events, form submissions, and custom events. Return as JSON array with fields: rule_name, rule_id, enabled, rule_order, event_type, conditions, actions, last_modified.`;
-            
-                console.log('[LLM] Calling AI to generate rules data...');
-                console.log('[LLM] Rules prompt:', rulesPrompt);
-                
-                let rulesData;
-                try {
-                    rulesData = await window.call_llm(
-                        'You are a data generator for Adobe Launch rules. Generate realistic rule data in the exact JSON format requested. Return ONLY valid JSON array, no additional text.',
-                        [{"role": "user", "content": rulesPrompt}],
-                        [{
-                            'rules': 'array of rule objects with fields: rule_name (string), rule_id (string), enabled (boolean), rule_order (number), event_type (string), conditions (string), actions (string), last_modified (string)'
-                        }]
-                    );
-                
-                    console.log('[LLM] Rules response received:', rulesData);
-                    console.log('[LLM] Rules data type:', typeof rulesData);
-                    console.log('[LLM] Rules array length:', rulesData.rules ? rulesData.rules.length : 'N/A');
-                    
-                    if (!rulesData.rules || !Array.isArray(rulesData.rules)) {
-                        console.error('[LLM] Invalid rules data format:', rulesData);
-                        throw new Error('Invalid rules data format');
-                    }
-                    
-                    console.log('[LLM] Sample rule:', rulesData.rules[0]);
-                } catch (error) {
-                    console.error('[LLM] Error fetching rules:', error);
-                    addStatus('Error fetching rules: ' + error.message, 'error');
-                    throw error;
-                }
-
+                const rulesData = { rules: SAMPLE_RULES };
                 console.log(`[API] Successfully loaded ${rulesData.rules.length} rules`);
                 addStatus(`Found ${rulesData.rules.length} rules`, 'success');
-                updateProgress(60);
+                updateProgress(70);
+                await new Promise(resolve => setTimeout(resolve, 300));
+
+                console.log('[API] Loading data elements from sample data...');
+                addStatus('Fetching data elements from property...', 'info');
+                updateProgress(80);
                 await new Promise(resolve => setTimeout(resolve, 500));
 
-                console.log('[API] Fetching data elements...');
-                addStatus('Fetching data elements from property...', 'info');
-                updateProgress(70);
-
-                const dataElementsPrompt = `Generate a realistic dataset of 15-20 Adobe Launch data elements for a typical e-commerce website. Include various types like JavaScript variables, cookie values, custom code, and CSS selectors. For data elements of type "Custom Code" or "JavaScript Variable", include a source_code field with realistic JavaScript code. Return as JSON array with fields: element_name, element_id, element_type, default_value, storage_duration, clean_text, enabled, last_modified, source_code (optional, only for Custom Code or JavaScript Variable types).`;
-            
-                console.log('[LLM] Calling AI to generate data elements...');
-                console.log('[LLM] Data elements prompt:', dataElementsPrompt);
-                
-                let dataElementsData;
-                try {
-                    dataElementsData = await window.call_llm(
-                        'You are a data generator for Adobe Launch data elements. Generate realistic data element data in the exact JSON format requested. Return ONLY valid JSON array, no additional text.',
-                        [{"role": "user", "content": dataElementsPrompt}],
-                        [{
-                            'data_elements': 'array of data element objects with fields: element_name (string), element_id (string), element_type (string), default_value (string), storage_duration (string), clean_text (boolean), enabled (boolean), last_modified (string), source_code (string, optional - only include for Custom Code or JavaScript Variable types with realistic JavaScript code)'
-                        }]
-                    );
-                
-                    console.log('[LLM] Data elements response received:', dataElementsData);
-                    console.log('[LLM] Data elements type:', typeof dataElementsData);
-                    console.log('[LLM] Data elements array length:', dataElementsData.data_elements ? dataElementsData.data_elements.length : 'N/A');
-                    
-                    if (!dataElementsData.data_elements || !Array.isArray(dataElementsData.data_elements)) {
-                        console.error('[LLM] Invalid data elements format:', dataElementsData);
-                        throw new Error('Invalid data elements format');
-                    }
-                    
-                    console.log('[LLM] Sample data element:', dataElementsData.data_elements[0]);
-                } catch (error) {
-                    console.error('[LLM] Error fetching data elements:', error);
-                    addStatus('Error fetching data elements: ' + error.message, 'error');
-                    throw error;
-                }
-
+                const dataElementsData = { data_elements: SAMPLE_DATA_ELEMENTS };
                 console.log(`[API] Successfully loaded ${dataElementsData.data_elements.length} data elements`);
                 addStatus(`Found ${dataElementsData.data_elements.length} data elements`, 'success');
-                updateProgress(90);
-                await new Promise(resolve => setTimeout(resolve, 500));
+                updateProgress(95);
+                await new Promise(resolve => setTimeout(resolve, 300));
 
                 propertyData.rules = rulesData.rules;
                 propertyData.dataElements = dataElementsData.data_elements;
             
                 console.log('[API] Final property data:', propertyData);
-                console.log('[API] ⚠️ WARNING: This app is currently generating DUMMY DATA using AI');
-                console.log('[API] ⚠️ To load real data, you need to implement actual Adobe Launch API calls');
-                console.log('[API] ⚠️ The launchpy library would need to be integrated on the backend');
+                console.log('[API] ℹ️ NOTE: This app is displaying SAMPLE DATA');
+                console.log('[API] ℹ️ To load real data, implement actual Adobe Launch API calls with launchpy backend');
                 
                 updateProgress(100);
                 addStatus('All data successfully loaded!', 'success');
-                addStatus('⚠️ Note: Currently displaying AI-generated dummy data', 'warning');
+                addStatus('ℹ️ Note: Currently displaying sample data for demonstration', 'warning');
             
                 return propertyData;
             }
-        
 
             document.getElementById('loadBtn').addEventListener('click', async function() {
                 console.log('[BUTTON] Load button clicked');
@@ -908,9 +1150,9 @@
                 console.log('[INIT] Adobe Launch Property Inspector initializing...');
                 loadFromLocalStorage();
                 console.log('[INIT] Adobe Launch Property Inspector loaded successfully');
-                console.log('[INIT] ⚠️ IMPORTANT: This app currently generates DUMMY DATA using AI');
-                console.log('[INIT] ⚠️ To connect to real Adobe Launch data, backend integration with launchpy is required');
-                console.log('[INIT] ⚠️ Check console logs prefixed with [API], [LLM], and [STORAGE] for debugging');
+                console.log('[INIT] ℹ️ IMPORTANT: This app displays SAMPLE DATA for demonstration');
+                console.log('[INIT] ℹ️ To connect to real Adobe Launch data, backend integration with launchpy is required');
+                console.log('[INIT] ℹ️ Check console logs prefixed with [API] and [STORAGE] for debugging');
             });
         
         </script>
