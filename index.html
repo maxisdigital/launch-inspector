@@ -10,11 +10,11 @@
 <meta content="website" property="og:type"/>
 <link href="assets/img_32x32_bd90b16b.png" rel="icon" type="image/png"/>
 <title>Adobe Launch Property Downloader</title>
-<script src="assets/script_1fdacd95.js"></script>
-<link href="assets/style_bb44be58.css" rel="stylesheet"/>
-<script crossorigin="" src="assets/script_2640c9a1.js"></script>
-<link href="assets/style_6dcd2576.css" rel="stylesheet"/>
-<script src="assets/script_fa49190a.js"></script>
+<script src="assets/script_b440bb9a.js"></script>
+<link href="assets/style_266f9ab8.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_5ce3bed9.js"></script>
+<link href="assets/style_9144c5d0.css" rel="stylesheet"/>
+<script src="assets/script_db017fd0.js"></script>
 <style>
             @font-face {
                 font-family: 'Font Awesome 6 Free';
@@ -210,14 +210,17 @@
                 dataElements: []
             };
 
+
             function saveToLocalStorage() {
                 const orgId = document.getElementById('orgId').value.trim();
                 const clientId = document.getElementById('clientId').value.trim();
+                const techAccountId = document.getElementById('techAccountId').value.trim();
                 const privateKeyPath = document.getElementById('privateKeyPath').value.trim();
                 const propertyId = document.getElementById('propertyId').value.trim();
 
                 if (orgId) localStorage.setItem('adobeLaunch_orgId', orgId);
                 if (clientId) localStorage.setItem('adobeLaunch_clientId', clientId);
+                if (techAccountId) localStorage.setItem('adobeLaunch_techAccountId', techAccountId);
                 if (privateKeyPath) localStorage.setItem('adobeLaunch_privateKeyPath', privateKeyPath);
                 if (propertyId) localStorage.setItem('adobeLaunch_propertyId', propertyId);
             }
@@ -225,11 +228,13 @@
             function loadFromLocalStorage() {
                 const orgId = localStorage.getItem('adobeLaunch_orgId');
                 const clientId = localStorage.getItem('adobeLaunch_clientId');
+                const techAccountId = localStorage.getItem('adobeLaunch_techAccountId');
                 const privateKeyPath = localStorage.getItem('adobeLaunch_privateKeyPath');
                 const propertyId = localStorage.getItem('adobeLaunch_propertyId');
 
                 if (orgId) document.getElementById('orgId').value = orgId;
                 if (clientId) document.getElementById('clientId').value = clientId;
+                if (techAccountId) document.getElementById('techAccountId').value = techAccountId;
                 if (privateKeyPath) document.getElementById('privateKeyPath').value = privateKeyPath;
                 if (propertyId) document.getElementById('propertyId').value = propertyId;
             }
@@ -572,6 +577,7 @@
 
             document.getElementById('orgId').addEventListener('input', saveToLocalStorage);
             document.getElementById('clientId').addEventListener('input', saveToLocalStorage);
+            document.getElementById('techAccountId').addEventListener('input', saveToLocalStorage);
             document.getElementById('privateKeyPath').addEventListener('input', saveToLocalStorage);
             document.getElementById('propertyId').addEventListener('input', saveToLocalStorage);
 
@@ -579,6 +585,7 @@
                 loadFromLocalStorage();
                 console.log('Adobe Launch Property Inspector loaded successfully');
             });
+        
         </script>
 </body>
 </html>
